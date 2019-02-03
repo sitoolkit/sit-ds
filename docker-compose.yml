@@ -1,0 +1,172 @@
+version: "3.7"
+services:
+
+  ldap:
+    environment:
+      LDAP_ORGANISATION: ${LDAP_ORGANISATION}
+      LDAP_DOMAIN: ${LDAP_DOMAIN}
+      TZ: ${OS_TIMEZONE}
+    image: osixia/openldap
+    volumes:
+      - ldap_data:/var/lib/ldap
+      - ldap_conf:/etc/ldap/slapd.d
+
+  ldapadmin:
+    depends_on:
+      - ldap
+    image : osixia/phpldapadmin
+    ports:
+      - 6443:443
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: ldap
+      TZ: ${OS_TIMEZONE}
+
+  smtp:
+    environment:
+      MAIL_RELAY_HOST: ${MAIL_RELAY_HOST}
+      MAIL_RELAY_PORT: ${MAIL_RELAY_PORT}
+      MAIL_RELAY_USER: ${MAIL_RELAY_USER}
+      MAIL_RELAY_PASS: ${MAIL_RELAY_PASS}
+      TZ: ${OS_TIMEZONE}
+    image: tecnativa/postfix-relay
+
+  passchg:
+    build: ./service/ssp
+    depends_on:
+      - ldap
+      - smtp
+    env_file:
+      - .env
+    environment:
+      MAIL_SMTP_HOST: smtp
+      LDAP_URL: ldap://ldap
+      TZ: ${OS_TIMEZONE}
+    ports:
+      - 81:80
+
+  kvs:
+    environment:
+      TZ: ${OS_TIMEZONE}
+    image: redis
+    restart: always
+
+  dbms:
+    image: postgres:alpine
+    environment:
+      TZ: ${OS_TIMEZONE}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d postgres -U postgres"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    ports:
+      - ${DB_PORT}:5432
+    restart: always
+    volumes:
+      - ./service/postgres/mount:/docker-entrypoint-initdb.d
+      - dbms_data:/var/lib/postgresql/data
+
+  scm:
+    env_file:
+      - .env
+    build: ./service/gitbucket
+    depends_on:
+      - ldap
+      - dbms
+      - kvs
+    environment:
+      GITBUCKET_DB_URL: ${DB_JDBC_URL}/gitbucket
+      GITBUCKET_DB_USER: gitbucket
+      GITBUCKET_DB_PASSWORD: gitbucket
+      TZ: ${OS_TIMEZONE}
+    # ports:
+    #   - 8081:8080
+    restart: always
+    volumes:
+      - scm_data:/etc/gitbucket
+
+  ci:
+    build: ./service/jenkins
+    depends_on:
+        - ldap
+    env_file:
+      - .env
+    environment:
+      TZ: ${OS_TIMEZONE}
+    # ports:
+    #   - 8082:8080
+    restart: always
+    volumes:
+      - ci_data:/var/jenkins_home
+
+  sca:
+    build: ./service/sonarqube
+    depends_on:
+      - ldap
+      - dbms
+    env_file:
+      - .env
+    environment:
+      SONARQUBE_JDBC_USERNAME: sonarqube
+      SONARQUBE_JDBC_PASSWORD: sonarqube
+      SONARQUBE_JDBC_URL: ${DB_JDBC_URL}/sonarqube
+      TZ: ${OS_TIMEZONE}
+    # ports:
+    #   - 9000:9000
+    restart: always
+    volumes:
+      - sca_data:/opt/sonarqube/data
+
+  its:
+    build: ./service/redmine
+    depends_on:
+      - dbms
+      - ldap
+    env_file:
+      - .env
+    environment:
+      REDMINE_DB_POSTGRES: dbms
+      REDMINE_DB_PORT: ${DB_PORT}
+      REDMINE_DB_USERNAME: redmine
+      REDMINE_DB_PASSWORD: redmine
+      REDMINE_DB_DATABASE: redmine
+      RAILS_RELATIVE_URL_ROOT: /redmine
+      TZ: ${OS_TIMEZONE}
+    # ports:
+    #   - 3000:3000
+    restart: always
+    volumes:
+      - its_data:/usr/src/redmine/files
+
+  proxy:
+    command: [nginx-debug, '-g', 'daemon off;']
+    depends_on:
+      - scm
+      - ci
+      - sca
+      - its
+    environment:
+        TZ: ${OS_TIMEZONE}
+    image: nginx:alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./service/nginx/mount:/etc/nginx/conf.d
+
+  work:
+    build: ./service/work
+    env_file:
+      - .env
+    environment:
+        TZ: ${OS_TIMEZONE}
+    volumes:
+      - ./service/work/mount:/mnt
+
+volumes:
+  ci_data:
+  dbms_data:
+  its_data:
+  ldap_conf:
+  ldap_data:
+  sca_data:
+  scm_data:
