@@ -72,12 +72,14 @@ services:
     build: ./service/gitbucket
     depends_on:
       - ldap
+      - smtp
       - dbms
       - kvs
     environment:
       GITBUCKET_DB_URL: ${DB_JDBC_URL}/gitbucket
       GITBUCKET_DB_USER: gitbucket
       GITBUCKET_DB_PASSWORD: gitbucket
+      MAIL_SMTP_HOST: smtp
       TZ: ${OS_TIMEZONE}
     # ports:
     #   - 8081:8080
