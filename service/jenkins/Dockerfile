@@ -16,7 +16,7 @@ RUN set -eux \
 USER jenkins
 
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-COPY config-ldap.groovy /usr/share/jenkins/ref/init.groovy.d
+COPY *.groovy /usr/share/jenkins/ref/init.groovy.d/
 
 RUN set -eux \
   && dos2unix /usr/share/jenkins/ref/plugins.txt \

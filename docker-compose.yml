@@ -90,10 +90,12 @@ services:
   ci:
     build: ./service/jenkins
     depends_on:
-        - ldap
+      - ldap
+      - smtp
     env_file:
       - .env
     environment:
+      MAIL_SMTP_HOST: smtp
       TZ: ${OS_TIMEZONE}
     # ports:
     #   - 8082:8080
