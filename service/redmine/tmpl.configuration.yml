@@ -1,0 +1,7 @@
+default:
+  email_delivery:
+    delivery_method: :smtp
+    smtp_settings:
+      enable_starttls_auto: false
+      port: {{.Env.SMTP_PORT}}
+      address: "{{.Env.MAIL_SMTP_HOST}}"

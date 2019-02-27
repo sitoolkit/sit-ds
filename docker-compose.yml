@@ -126,6 +126,7 @@ services:
     depends_on:
       - dbms
       - ldap
+      - smtp
     env_file:
       - .env
     environment:
@@ -135,6 +136,7 @@ services:
       REDMINE_DB_PASSWORD: redmine
       REDMINE_DB_DATABASE: redmine
       RAILS_RELATIVE_URL_ROOT: /redmine
+      MAIL_SMTP_HOST: smtp
       TZ: ${OS_TIMEZONE}
     # ports:
     #   - 3000:3000
