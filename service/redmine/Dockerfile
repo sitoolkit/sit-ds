@@ -11,6 +11,5 @@ RUN set -eux \
 
 COPY config.ru ${REDMINE_DIR}
 COPY tmpl.configuration.yml ${REDMINE_DIR}/config
-COPY 20190227000000_insert_settings.rb.tmpl ${REDMINE_DIR}/db/migrate
 
-ENTRYPOINT dockerize -template ${REDMINE_DIR}/db/migrate/20190227000000_insert_settings.rb.tmpl:${REDMINE_DIR}/db/migrate/20190227000000_insert_settings.rb -template ${REDMINE_DIR}/config/tmpl.configuration.yml:${REDMINE_DIR}/config/configuration.yml -wait tcp://dbms:${DB_PORT} /docker-entrypoint.sh passenger start
+ENTRYPOINT dockerize -template ${REDMINE_DIR}/config/tmpl.configuration.yml:${REDMINE_DIR}/config/configuration.yml -wait tcp://dbms:${DB_PORT} /docker-entrypoint.sh passenger start

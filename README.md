@@ -40,7 +40,7 @@ Each service has the following settings necessary for team development.
 git clone https://github.com/sitoolkit/sit-ds.git
 cd sit-ds
 docker-compose up -d
-docker-compose exec work psql -h dbms -d redmine -U redmine -f /tmp/insert-auth_sources.sql
+docker-compose exec work psql -h dbms -d redmine -U redmine -f /tmp/redmine-additional-config.sql
 ```
 
 The endpoint URL to each service and the connection information of the admin user are as follows.
