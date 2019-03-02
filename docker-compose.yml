@@ -97,8 +97,9 @@ services:
     environment:
       MAIL_SMTP_HOST: smtp
       TZ: ${OS_TIMEZONE}
-    # ports:
-    #   - 8082:8080
+    ports:
+      # - 8082:8080
+      - 50000:50000
     restart: always
     volumes:
       - ci_data:/var/jenkins_home
