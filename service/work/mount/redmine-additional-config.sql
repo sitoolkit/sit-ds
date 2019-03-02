@@ -5,12 +5,12 @@ VALUES(1, 'AuthSourceLdap', 'LDAP', '{{ .Env.LDAP_HOST  }}', {{ .Env.LDAP_PORT }
 INSERT INTO settings
   (name, value, updated_on)
 VALUES
-  ('mail_from', '{{ .Env.MAIL_RELAY_USER }}', current_timestamp),
-  ('bcc_recipients', '1', current_timestamp),
-  ('plain_text_mail', '0', current_timestamp),
-  ('notified_events', '---\n- issue_added\n- issue_updated', current_timestamp),
-  ('emails_header', '', current_timestamp),
-  ('emails_footer', 'You have received this notification because you have either subscribed to it, or are involved in it.\r\nTo change your notification preferences, please click here: http://hostname/my/account', current_timestamp);
+  ('emails_footer', 'You have received this notification because you have either subscribed to it, or are involved in it.\r\nTo change your notification preferences, please click here: {{ .Env.PUBLIC_PROTOCOL }}://{{ .Env.PUBLIC_HOST }}/redmine/my/account', current_timestamp)
+  ,('host_name', '{{ .Env.PUBLIC_HOST }}/redmine', current_timestamp)
+  ,('mail_from', '{{ .Env.MAIL_RELAY_USER }}', current_timestamp)
+  ,('protocol', '{{ .Env.PUBLIC_PROTOCOL }}', current_timestamp)
+  ,('text_formatting', 'markdown', current_timestamp)
+  ;
 
 SELECT *
 FROM auth_sources;
