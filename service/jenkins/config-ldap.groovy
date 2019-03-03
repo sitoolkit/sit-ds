@@ -20,7 +20,7 @@ def env = System.getenv()
 def server = "ldap://${env.LDAP_HOST}"
 def rootDN = "${env.LDAP_ROOT_DN}"
 def userSearchBase = ''
-def userSearch = "${env.LDAP_USER_SEARCH}"
+def userSearch = "${env.LDAP_LOGIN_ATTRIBUTE}={0}"
 def groupSearchBase = ''
 def managerDN = "${env.LDAP_MANAGER_DN}"
 String passcode = "${env.LDAP_MANAGER_PASSWORD}"

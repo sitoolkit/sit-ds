@@ -40,7 +40,7 @@ Each service has the following settings necessary for team development.
 git clone https://github.com/sitoolkit/sit-ds.git
 cd sit-ds
 docker-compose up -d
-docker-compose exec work psql -h dbms -d redmine -U redmine -f /tmp/redmine-additional-config.sql
+docker-compose exec work /mnt/init.sh
 ```
 
 The endpoint URL to each service and the connection information of the admin user are as follows.
@@ -57,6 +57,12 @@ The endpoint URL to each service and the connection information of the admin use
 
 * *1 For Docker Toolbox, it is an IP address that can be confirmed with docker-machine ls command instead of localhost.
 
+You can log in to GitBucket, Jenkins, Sonarqube, Redmine with the following user ID / password.
+
+* user001 / password
+* user002 / password
+* user003 / password
+
 
 ### Add users
 
@@ -65,11 +71,6 @@ The endpoint URL to each service and the connection information of the admin use
 2. Execute the following command.
 
 ```
+docker-compose restart work
 docker-compose exec work ldapadd -h ldap -x -D "cn=admin,dc=example,dc=org" -w admin -f /tmp/add-users.ldif
 ```
-
-You can log in to each tool with the following user ID / password.
-
-* user001 / password
-* user002 / password
-* user003 / password
