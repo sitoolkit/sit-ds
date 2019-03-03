@@ -40,7 +40,7 @@ Each service has the following settings necessary for team development.
 git clone https://github.com/sitoolkit/sit-ds.git
 cd sit-ds
 docker-compose up -d
-docker-compose exec work /mnt/init.sh
+docker-compose exec work /tmp/init.sh
 ```
 
 The endpoint URL to each service and the connection information of the admin user are as follows.
