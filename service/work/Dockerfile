@@ -2,4 +2,4 @@ FROM jwilder/dockerize
 
 RUN apk update && apk add bash tree postgresql-client openldap-clients && rm -rf /var/cache/apk/*
 
-CMD chmod u+x /mnt/init.sh ; dockerize -template /mnt:/tmp tail -f /dev/null
+CMD dockerize -template /mnt:/tmp chmod u+x /tmp/init.sh ; tail -f /dev/null
