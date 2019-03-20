@@ -8,6 +8,10 @@ $ldap_fullname_attribute = '{{ .Env.LDAP_FULLNAME_ATTRIBUTE }}';
 $ldap_url = '{{ .Env.LDAP_URL }}';
 $ldap_filter = "(&(objectClass=person)($ldap_login_attribute={login}))";
 
+$mail_address_use_ldap = true;
+$mail_attribute = '{{ .Env.LDAP_MAIL_ATTRIBUTE }}';
+$reset_url = '{{ .Env.PUBLIC_PROTOCOL }}' . '://' . '{{ .Env.PUBLIC_HOST }}' . '/passchg/';
+
 $mail_from = '{{ .Env.MAIL_RELAY_USER }}';
 
 $mail_smtp_host = '{{ .Env.MAIL_SMTP_HOST }}';
@@ -15,5 +19,5 @@ $mail_smtp_port = {{ .Env.SMTP_PORT }};
 $mail_smtp_secure = '';
 $mail_smtp_autotls = false;
 
-$keyphrase = 'sit-ci-secret'; 
+$keyphrase = 'sit-ci-secret';
 ?>
