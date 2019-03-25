@@ -1,4 +1,5 @@
-FROM jwilder/dockerize
+ARG VERSION
+FROM jwilder/dockerize:${VERSION}
 
 RUN apk update && apk add bash tree postgresql-client openldap-clients && rm -rf /var/cache/apk/*
 

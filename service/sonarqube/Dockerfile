@@ -1,4 +1,5 @@
-FROM sonarqube
+ARG VERSION
+FROM sonarqube:${VERSION}
 
 ENV DOCKERIZE_VERSION=v0.6.1
 

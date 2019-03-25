@@ -6,7 +6,7 @@ services:
       LDAP_ORGANISATION: ${LDAP_ORGANISATION}
       LDAP_DOMAIN: ${LDAP_DOMAIN}
       TZ: ${OS_TIMEZONE}
-    image: osixia/openldap
+    image: osixia/openldap:${LDAP_VERSION}
     volumes:
       - ldap_data:/var/lib/ldap
       - ldap_conf:/etc/ldap/slapd.d
@@ -14,7 +14,7 @@ services:
   ldapadmin:
     depends_on:
       - ldap
-    image : osixia/phpldapadmin
+    image : osixia/phpldapadmin:${LDAPADMIN_VERSION}
     ports:
       - 6443:443
     environment:
@@ -31,7 +31,10 @@ services:
     image: tecnativa/postfix-relay
 
   passchg:
-    build: ./service/ssp
+    build:
+      context: ./service/ssp
+      args:
+        VERSION: ${PASSCHG_VERSION}
     depends_on:
       - ldap
       - smtp
@@ -47,11 +50,11 @@ services:
   kvs:
     environment:
       TZ: ${OS_TIMEZONE}
-    image: redis
+    image: redis:${KVS_VERSION}
     restart: always
 
   dbms:
-    image: postgres:alpine
+    image: postgres:${DBMS_VERSION}
     environment:
       TZ: ${OS_TIMEZONE}
     healthcheck:
@@ -69,7 +72,10 @@ services:
   scm:
     env_file:
       - .env
-    build: ./service/gitbucket
+    build:
+      context: ./service/gitbucket
+      args:
+        VERSION: ${SCM_VERSION}
     depends_on:
       - ldap
       - smtp
@@ -88,7 +94,10 @@ services:
       - scm_data:/etc/gitbucket
 
   ci:
-    build: ./service/jenkins
+    build:
+      context: ./service/jenkins
+      args:
+        VERSION: ${CI_VERSION}
     depends_on:
       - ldap
       - smtp
@@ -105,7 +114,10 @@ services:
       - ci_data:/var/jenkins_home
 
   sca:
-    build: ./service/sonarqube
+    build:
+      context: ./service/sonarqube
+      args:
+        VERSION: ${SCA_VERSION}
     depends_on:
       - ldap
       - dbms
@@ -123,7 +135,10 @@ services:
       - sca_data:/opt/sonarqube/data
 
   its:
-    build: ./service/redmine
+    build:
+      context: ./service/redmine
+      args:
+        VERSION: ${ITS_VERSION}
     depends_on:
       - dbms
       - ldap
@@ -154,14 +169,17 @@ services:
       - its
     environment:
         TZ: ${OS_TIMEZONE}
-    image: nginx:alpine
+    image: nginx:${PROXY_VERSION}
     ports:
       - 80:80
     volumes:
       - ./service/nginx/mount:/etc/nginx/conf.d
 
   work:
-    build: ./service/work
+    build:
+      context: ./service/work
+      args:
+        VERSION: ${WORK_VERSION}
     env_file:
       - .env
     environment:

@@ -1,4 +1,5 @@
-FROM gitbucket/gitbucket
+ARG VERSION
+FROM gitbucket/gitbucket:${VERSION}
 
 ENV GITBUCKET_HOME=/etc/gitbucket \
     DOCKERIZE_VERSION=v0.6.1
@@ -11,8 +12,8 @@ RUN set -eux \
     && rm dockerize.tar.gz
 
 # Gitbucket supports to set configuration parameters via JVM arguments or environment variables,
-# but when a boolean parameter is passed ClassCastException is thrown. 
-# So we use gitbucket.conf and dockerize template. 
+# but when a boolean parameter is passed ClassCastException is thrown.
+# So we use gitbucket.conf and dockerize template.
 
 COPY tmpl.gitbucket.conf ${GITBUCKET_HOME}
 
