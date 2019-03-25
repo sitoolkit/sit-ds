@@ -1,4 +1,5 @@
-FROM redmine:passenger
+ARG VERSION
+FROM redmine:${VERSION}
 
 ENV DOCKERIZE_VERSION=v0.6.1 \
     REDMINE_DIR=/usr/src/redmine

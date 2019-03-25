@@ -1,4 +1,5 @@
-FROM jenkins/jenkins:lts
+ARG VERSION
+FROM jenkins/jenkins:${VERSION}
 
 ENV JAVA_OPTS=-Djenkins.install.runSetupWizard=false \
     JENKINS_OPTS=--prefix=/jenkins
