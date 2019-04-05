@@ -52,7 +52,7 @@ The endpoint URL to each service and the connection information of the admin use
 | SonarQube             | http://localhost/sonarqube                | admin / admin                      |
 | Redmne                | http://localhost/redmine                  | admin / admin                      |
 | PostgreSQL            | jdbc:postgresql://localhost:5432/postgres | postgres / postgres                |
-| Self Service Password | https://localhost/passchg                 | admin / admin                      |
+| Self Service Password | http://localhost/passchg                  | admin / admin                      |
 | phpLDAPAdmin          | https://localhost:6443                    | cn=admin,dc=example,dc=org / admin |
 
 * *1 For Docker Toolbox, it is an IP address that can be confirmed with docker-machine ls command instead of localhost.
