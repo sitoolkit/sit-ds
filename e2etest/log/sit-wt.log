@@ -1,0 +1,34 @@
+2019/04/08 18:59:44.329 [main   ] INFO  MessageManager                 - message resource is initialised with locale ja_JP
+2019/04/08 18:59:44.341 [main   ] INFO  SitWtApplication               - environment info: java.version=1.8.0_201, java.vendor=Oracle Corporation, os.name=Mac OS X, os.arch=x86_64, os.version=10.14
+2019/04/08 18:59:44.448 [ Thread] INFO  SitoolkitConfig                - /Users/mori/.sitoolkit/config.properties was not found
+2019/04/08 18:59:44.541 [ Thread] INFO  PropertyUtils                  - プロパティを読み込みます jar:file:/Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/sit-wt-app-3.0.0-alpha.2.jar!/firefoxinstaller-default.properties
+2019/04/08 18:59:44.543 [ Thread] INFO  PropertyUtils                  - プロパティを読み込みます jar:file:/Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/sit-wt-app-3.0.0-alpha.2.jar!/webdriver-default.properties
+2019/04/08 18:59:44.728 [hread-1] INFO  tationConfigApplicationContext - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@473e0bae: startup date [Mon Apr 08 18:59:44 JST 2019]; root of context hierarchy
+2019/04/08 18:59:44.851 [hread-1] INFO  ConfigurationClassParser       - Properties location [classpath:sit-wt.properties] not resolvable: class path resource [sit-wt.properties] cannot be opened because it does not exist
+2019/04/08 18:59:44.923 [hread-1] INFO  DefaultListableBeanFactory     - Overriding bean definition for bean 'getOperationConverter' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=baseConfig; factoryMethodName=getOperationConverter; initMethodName=null; destroyMethodName=(inferred); defined in io.sitoolkit.wt.app.config.BaseConfig] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=true; factoryBeanName=testScriptConfig; factoryMethodName=getOperationConverter; initMethodName=null; destroyMethodName=(inferred); defined in io.sitoolkit.wt.app.config.TestScriptConfig]
+2019/04/08 18:59:45.263 [hread-1] INFO  redAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019/04/08 18:59:45.379 [hread-1] INFO  PropertyUtils                  - プロパティを読み込みます jar:file:/Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/sit-wt-app-3.0.0-alpha.2.jar!/capabilities.properties
+2019/04/08 18:59:46.403 [ Thread] INFO  ProjectService                 - opening project in /Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest
+2019/04/08 18:59:51.915 [ Thread] INFO  ProjectService                 - opening project in /Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest
+2019/04/08 18:59:53.575 [ Thread] INFO  ProjectService                 - loading project with /Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/pom.xml
+2019/04/08 18:59:53.577 [ Thread] DEBUG PropertyManager                - no property file /Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest
+2019/04/08 18:59:53.621 [ Thread] DEBUG FileSystemWatchService         - registered /Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/pagescript sun.nio.fs.PollingWatchService$PollingWatchKey@4963041
+2019/04/08 18:59:53.621 [ Thread] DEBUG FileSystemWatchService         - registered /Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/testscript sun.nio.fs.PollingWatchService$PollingWatchKey@2b4c3b1a
+2019/04/08 18:59:53.621 [ Thread] DEBUG FileSystemWatchService         - registered /Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/base-evidence sun.nio.fs.PollingWatchService$PollingWatchKey@630e9aa3
+2019/04/08 18:59:53.622 [ Thread] DEBUG FileSystemWatchService         - registered /Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/evidence sun.nio.fs.PollingWatchService$PollingWatchKey@61049df9
+2019/04/08 18:59:53.638 [hread-1] INFO  MavenWrapperDownloader         - 
+2019/04/08 18:59:53.639 [hread-1] INFO  MavenWrapperDownloader         - The Maven Wrapper version 0.3.0 has been successfully setup for your project.
+2019/04/08 18:59:53.640 [hread-1] INFO  MavenWrapperDownloader         - Using Apache Maven 3.5.4
+2019/04/08 18:59:53.640 [hread-1] INFO  MavenWrapperDownloader         - 
+2019/04/08 18:59:53.640 [hread-1] INFO  MavenUtils                     - mvn command is '/Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/mvnw'
+2019/04/08 18:59:53.641 [hread-1] INFO  MavenUtils                     - mvn command is '/Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/mvnw'
+2019/04/08 18:59:53.664 [hread-1] INFO  ProcessExecutor                - process java.lang.UNIXProcess@24697f29 starts [/Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/mvnw, versions:display-parent-updates, -f, /Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/sit-wt-app-pom-1554717593622.xml]
+2019/04/08 19:00:00.087 [hread-1] INFO  ProcessExecutor                - process java.lang.UNIXProcess@24697f29 exits with code : 0
+2019/04/08 19:00:00.090 [hread-1] INFO  UpdateProcessClient            - sit-wt-app 3.0.0-alpha.2 is latest
+2019/04/08 19:00:26.058 [hread-2] INFO  FileSystemWatchService         - ignorable exception class java.nio.file.ClosedWatchServiceException
+2019/04/08 19:00:26.058 [ Thread] INFO  MavenUtils                     - mvn command is '/Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/mvnw'
+2019/04/08 19:00:26.063 [ Thread] INFO  ProcessExecutor                - process java.lang.UNIXProcess@2c843350 starts [/Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/mvnw, jetty:stop, -f, /Users/mori/Desktop/Work/git/feature/e2etest/sit-ds/e2etest/sample]
+2019/04/08 19:00:26.067 [ Thread] INFO  PropertyManager                - saved properties : {script.file.csv.charset=UTF-8, baseUrl=, script.file.csv.bom=true}
+2019/04/08 19:00:27.197 [hread-3] INFO  ProcessExecutor                - process java.lang.UNIXProcess@2c843350 exits with code : 1
+2019/04/08 19:00:27.198 [hread-3] ERROR ProcessExecutor                - 
+ 

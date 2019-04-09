@@ -1,0 +1,8 @@
+No.,項目名,操作,ロケーター形式,ロケーター,データ形式,スクリーンショット,ブレークポイント,ケース_000,ケース_001,ケース_002,ケース_003
+1,startUrl,open,,/gitbucket/signin?redirect=%2F,,,,y,y,y,y
+2,userId,input,id,userName,,,,root,user001,user002,user003
+3,password,input,id,password,,,,root,password,password,password
+4,login,click,css,input.btn.btn-success,,前,,y,y,y,y
+5,clickDropDown,click,css,li.dropdown.notifications-menu:nth-child(2) > a,,前,,y,y,y,y
+6,viewAccount,click,link,Your profile,,前,,y,y,y,y
+7,verifyLogin,verify,css,div.pull-left.info p,,後,,root,user001,user002,user003
