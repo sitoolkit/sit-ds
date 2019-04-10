@@ -16,14 +16,6 @@
     </dependency>
   </dependencies>
 
-  <repositories>
-  <repository>
-    <id>central</id>
-    <name>Central Repository</name>
-    <url>https://repo.maven.apache.org/maven2</url>
-  </repository>
-</repositories>
-
   <parent>
     <groupId>io.sitoolkit.wt</groupId>
     <artifactId>sit-wt-project</artifactId>
