@@ -16,10 +16,17 @@
     </dependency>
   </dependencies>
 
+  <repositories>
+  <repository>
+    <id>central</id>
+    <name>Central Repository</name>
+    <url>https://repo.maven.apache.org/maven2</url>
+  </repository>
+</repositories>
+
   <parent>
     <groupId>io.sitoolkit.wt</groupId>
     <artifactId>sit-wt-project</artifactId>
-    <version>3.0.0-beta.1-SNAPSHOT</version>
+    <version>3.0.0-alpha.2-SNAPSHOT</version>
   </parent>
-  
 </project>
