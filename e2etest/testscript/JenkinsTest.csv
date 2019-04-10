@@ -1,0 +1,6 @@
+No.,項目名,操作,ロケーター形式,ロケーター,データ形式,スクリーンショット,ブレークポイント,ケース_000,ケース_001,ケース_002,ケース_003
+1,startUrl,open,,/jenkins/login?from=%2Fjenkins%2F,,,,y,y,y,y
+2,userId,input,id,j_username,,,,admin,user001,user002,user003
+3,password,input,name,j_password,,,,admin,password,password,password
+4,signIn,click,name,Submit,,前,,y,y,y,y
+5,verifyLogin,verify,css,#header div.login a.model-link.inside.inverse b,,後,,admin,user001,user002,user003
