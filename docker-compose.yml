@@ -6,7 +6,7 @@ services:
       LDAP_ORGANISATION: ${LDAP_ORGANISATION}
       LDAP_DOMAIN: ${LDAP_DOMAIN}
       TZ: ${OS_TIMEZONE}
-    image: osixia/openldap:${LDAP_VERSION}
+    image: osixia/openldap:${VERSION_LDAP}
     volumes:
       - ldap_data:/var/lib/ldap
       - ldap_conf:/etc/ldap/slapd.d
@@ -14,7 +14,7 @@ services:
   ldapadmin:
     depends_on:
       - ldap
-    image : osixia/phpldapadmin:${LDAPADMIN_VERSION}
+    image : osixia/phpldapadmin:${VERSION_LDAPADMIN}
     ports:
       - 6443:443
     environment:
@@ -34,7 +34,7 @@ services:
     build:
       context: ./service/ssp
       args:
-        VERSION: ${PASSCHG_VERSION}
+        VERSION: ${VERSION_PASSCHG}
     depends_on:
       - ldap
       - smtp
@@ -50,11 +50,11 @@ services:
   kvs:
     environment:
       TZ: ${OS_TIMEZONE}
-    image: redis:${KVS_VERSION}
+    image: redis:${VERSION_KVS}
     restart: always
 
   dbms:
-    image: postgres:${DBMS_VERSION}
+    image: postgres:${VERSION_DBMS}
     environment:
       TZ: ${OS_TIMEZONE}
     healthcheck:
@@ -75,7 +75,7 @@ services:
     build:
       context: ./service/gitbucket
       args:
-        VERSION: ${SCM_VERSION}
+        VERSION: ${VERSION_SCM}
     depends_on:
       - ldap
       - smtp
@@ -97,7 +97,7 @@ services:
     build:
       context: ./service/jenkins
       args:
-        VERSION: ${CI_VERSION}
+        VERSION: ${VERSION_CI}
     depends_on:
       - ldap
       - smtp
@@ -117,7 +117,7 @@ services:
     build:
       context: ./service/sonarqube
       args:
-        VERSION: ${SCA_VERSION}
+        VERSION: ${VERSION_SCA}
     depends_on:
       - ldap
       - dbms
@@ -138,7 +138,7 @@ services:
     build:
       context: ./service/redmine
       args:
-        VERSION: ${ITS_VERSION}
+        VERSION: ${VERSION_ITS}
     depends_on:
       - dbms
       - ldap
@@ -169,7 +169,7 @@ services:
       - its
     environment:
         TZ: ${OS_TIMEZONE}
-    image: nginx:${PROXY_VERSION}
+    image: nginx:${VERSION_PROXY}
     ports:
       - 80:80
     volumes:
@@ -179,7 +179,7 @@ services:
     build:
       context: ./service/work
       args:
-        VERSION: ${WORK_VERSION}
+        VERSION: ${VERSION_WORK}
     env_file:
       - .env
     environment:
