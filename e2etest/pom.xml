@@ -19,6 +19,16 @@
   <parent>
     <groupId>io.sitoolkit.wt</groupId>
     <artifactId>sit-wt-project</artifactId>
-    <version>3.0.0-alpha.2-SNAPSHOT</version>
+    <version>3.0.0-alpha.2</version>
   </parent>
+
+  <properties>
+    <driver.type>chrome</driver.type>
+    <baseUrl>http://localhost</baseUrl>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+  </properties>
+
+  <build>
+    <defaultGoal>clean verify</defaultGoal>
+  </build>
 </project>

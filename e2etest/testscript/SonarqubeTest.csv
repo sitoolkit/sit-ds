@@ -1,8 +1,7 @@
-No.,項目名,操作,ロケーター形式,ロケーター,データ形式,スクリーンショット,ブレークポイント,ケース_000,ケース_001,ケース_002,ケース_003
-1,startUrl,open,,/sonarqube/sessions/new,,,,y,y,y,y
-2,userId,input,id,login,,,,admin,user001,user002,user003
-3,password,input,id,password,,,,admin,password,password,password
-4,login,click,css,#login_form button.button,,前,,y,y,y,y
-5,clickDropDown,click,css,li.dropdown.js-user-authenticated a.dropdown-toggle,,前,,y,y,y,y
-6,viewAccount,click,link,My Account,,前,,y,y,y,y
-7,verifyLogin,verify,id,login,,後,,admin,user001,user002,user003
+No.,項目名,操作,ロケーター形式,ロケーター,データ形式,スクリーンショット,ブレークポイント,ケース_000,ケース_001
+1,startUrl,open,,sonarqube/sessions/new,,,,y,y
+2,userId,input,id,login,,,,admin,user001
+3,password,input,id,password,,,,admin,password
+4,login,click,css,#login_form button.button,,前,,y,y
+5,viewAccount,open,,sonarqube/account,,前,,y,y
+7,verifyLogin,verify,id,login,,後,,admin,user001

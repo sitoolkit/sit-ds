@@ -1,8 +1,0 @@
-No.,項目名,操作,ロケーター形式,ロケーター,データ形式,スクリーンショット,ブレークポイント,ケース_000
-1,startUrl,open,,https://localhost:6443,,,,y
-2,loginLink,click,link,login,,,,y
-3,userId,input,id,login,,,,"cn=admin,dc=example,dc=org"
-4,password,input,id,password,,,,admin
-5,login,click,name,submit,,前,,y
-6,viewLoggedIn,click,css,td.logged_in > a,,前,,y
-6,verifyLogin,verify,css,#ajBODY h3.title,,後,,cn=admin

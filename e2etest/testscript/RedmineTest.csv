@@ -1,7 +1,6 @@
-﻿No.,項目名,操作,ロケーター形式,ロケーター,データ形式,スクリーンショット,ブレークポイント,ケース_000,ケース_001,ケース_002,ケース_003
-1,startUrl,open,,/redmine/login,,,,y,y,y,y
-3,userId,input,id,username,,,,admin,user001,user002,user003
-4,password,input,id,password,,,,admin,password,password,password
-5,login,click,name,login,,前,,y,y,y,y
-6,togglemenu,click,css,a.mobile-toggle-button.js-flyout-menu-toggle-button,,,,y,y,y,y
-6,verifyLogin,verify,css,a.user.active,,後,,admin,user001,user002,user003
+No.,項目名,操作,ロケーター形式,ロケーター,データ形式,スクリーンショット,ブレークポイント,ケース_001
+1,startUrl,open,,/redmine/login,,,,y
+3,userId,input,id,username,,,,user001
+4,password,input,id,password,,,,password
+5,login,click,name,login,,前,,y
+6,verifyLogin,verify,css,#loggedas a,,後,,user001
