@@ -1,9 +1,11 @@
-evidence
-guidance
-log
-target
+/evidence/
+/guidance/
+/log/
+sit-wt-app-pom-*
+/target/
 
 .classpath
 .factorypath
 .project
 .settings
+
