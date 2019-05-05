@@ -173,7 +173,8 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./service/nginx/mount:/etc/nginx/conf.d
+      - ./service/nginx/mount/conf:/etc/nginx/conf.d
+      - ./service/nginx/mount/html:/usr/share/nginx/html
 
   work:
     build:
