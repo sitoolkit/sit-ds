@@ -65,5 +65,7 @@ if [[ ! -e ${BACKUP_ROOT} ]]; then
     mkdir -p ${BACKUP_ROOT}
 fi
 
+docker-compose stop
 do_backup
 delete_old_backup
+docker-compose start
