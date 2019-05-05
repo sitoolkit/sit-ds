@@ -74,3 +74,22 @@ You can log in to GitBucket, Jenkins, Sonarqube, Redmine with the following user
 docker-compose restart work
 docker-compose exec work ldapadd -h ldap -x -D "cn=admin,dc=example,dc=org" -w admin -f /tmp/add-users.ldif
 ```
+
+### Backup
+
+1. Put backup.sh in the directory where you want to save the backup files.
+2. Execute backup.sh.
+   1. All services will be stopped.
+   2. All named volumes in docker-compose.yml will be backuped to backup/{timestamp} directory.
+   3. 8th and subsequent directories in order of age will be deleted. 
+   4. All services will be started.
+
+```
+backup_root
+  - backup.sh
+  - backup
+    - yyyymmdd_hhmmss
+      - ci_data.tar
+      - dbms_data.tar
+        :
+```

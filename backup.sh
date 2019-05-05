@@ -14,7 +14,7 @@ log() {
 
 
 do_backup() {
-    readonly VOLUME_PREFIX=sit-ds_
+    readonly VOLUME_PREFIX='sit-ds_'
     readonly BACKUP_VOLUMES=(
         "ci_data" "dbms_data" "its_data" "ldap_conf"
         "ldap_data" "sca_data" "scm_data")
@@ -22,8 +22,7 @@ do_backup() {
     readonly LOCAL_BACKUP_DIR="${BACKUP_ROOT}/${TIMESTAMP}"
 
 
-    for backup_volume in ${BACKUP_VOLUMES[@]}
-    do
+    for backup_volume in ${BACKUP_VOLUMES[@]}; do
         volume_name=${VOLUME_PREFIX}${backup_volume}
         log "Start backup ${volume_name} to ${LOCAL_BACKUP_DIR}"
 
