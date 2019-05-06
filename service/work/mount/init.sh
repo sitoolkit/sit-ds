@@ -2,8 +2,16 @@
 
 set -eux
 
+readonly INIT_FILE='/tmp/.init'
+
 dockerize -wait tcp://ldap:${LDAP_PORT} -wait tcp://its:${ITS_PORT} 
 
-ldapadd -c -h ldap -x -D "{{ .Env.LDAP_MANAGER_DN }}" -w {{ .Env.LDAP_MANAGER_PASSWORD }} -f /tmp/add-users.ldif || true
+if [[ -e ${INIT_FILE} ]]; then
 
-psql -h dbms -d redmine -U redmine -f /tmp/redmine-additional-config.sql || true
+  exit 0
+
+fi
+
+psql -h dbms -d redmine -U redmine -f /tmp/redmine-additional-config.sql
+
+touch ${INIT_FILE}

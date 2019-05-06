@@ -40,12 +40,11 @@ Each service has the following settings necessary for team development.
 git clone https://github.com/sitoolkit/sit-ds.git
 cd sit-ds
 docker-compose up -d
-docker-compose exec work /tmp/init.sh
 ```
 
 The endpoint URL to each service and the connection information of the admin user are as follows.
 
-|        Server         |             Endpoint URL (*1)             |         userId / password          |
+|        Server         |             Endpoint URL (*1)             |         UserId / Password          |
 | --------------------- | ----------------------------------------- | ---------------------------------- |
 | GitBucket             | http://localhost/gitbucket                | root  / root                       |
 | Jenkins               | http://localhost/jenkins                  | admin / admin                      |
@@ -57,23 +56,60 @@ The endpoint URL to each service and the connection information of the admin use
 
 * *1 For Docker Toolbox, it is an IP address that can be confirmed with docker-machine ls command instead of localhost.
 
-You can log in to GitBucket, Jenkins, Sonarqube, Redmine with the following user ID / password.
 
-* user001 / password
-* user002 / password
-* user003 / password
+### How To Add Users
 
+1. Create new ldif file and add the user information you want to add.
 
-### Add users
+* add-users.ldif
 
-1. Add the user information you want to add to the following file.
-  * service/work/mount/add-users.ldif
+```
+dn: cn=user001,dc=example,dc=org
+changetype: add
+cn: user001
+sn: User
+givenName: 001
+mail: user001@exapmle.org
+objectClass: inetOrgPerson
+objectClass: person
+objectClass: top
+userPassword: password
+```
+
 2. Execute the following command.
 
 ```
-docker-compose restart work
-docker-compose exec work ldapadd -h ldap -x -D "cn=admin,dc=example,dc=org" -w admin -f /tmp/add-users.ldif
+docker cp add-users.ldiff sit-ds_work_1:/tmp
+docker-compose exec work ldapmod add-users.ldif
 ```
+
+Then you can log in to all services with the following user ID / password.
+
+* user001 / password
+
+
+### How To Change LDAP Manager Password
+
+1. Execute the following command.
+
+```
+docker-compose exec work adminpassmod new_password
+```
+
+2. Modify LDAP_MANAGER_PASSWORD value in .env file to new one.
+
+* .env
+
+```
+LDAP_MANAGER_PASSWORD=new_password
+```
+
+3. Execute the following command.
+
+```
+docker-compose up -d
+```
+
 
 ### Backup
 

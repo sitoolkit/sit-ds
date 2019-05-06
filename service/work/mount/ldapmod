@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ldapmodify -h ldap -x -D "{{ .Env.LDAP_MANAGER_DN }}" -w {{ .Env.LDAP_MANAGER_PASSWORD }} -f $1
