@@ -1,9 +1,0 @@
-#!/bin/bash
-
-export NEW_PASSWORD=$1
-
-dockerize -template /mnt/admin-password.ldif:/tmp/admin-password.ldif 
-
-ldapmod /tmp/admin-password.ldif
-
-export -n NEW_PASSWORD

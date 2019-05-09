@@ -10,6 +10,5 @@ WORKDIR /tmp
 CMD dockerize -template /mnt:/tmp \
   chmod u+x /tmp/init.sh ;\
   chmod u+x /tmp/ldapmod ;\
-  chmod u+x /tmp/adminpassmod ;\
   /tmp/init.sh ;\
   tail -f /dev/null
