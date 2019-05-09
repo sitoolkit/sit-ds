@@ -3,6 +3,7 @@ services:
 
   ldap:
     environment:
+      LDAP_ADMIN_PASSWORD: ${LDAP_MANAGER_PASSWORD}
       LDAP_ORGANISATION: ${LDAP_ORGANISATION}
       LDAP_DOMAIN: ${LDAP_DOMAIN}
       TZ: ${OS_TIMEZONE}

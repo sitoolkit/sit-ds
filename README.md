@@ -88,29 +88,6 @@ Then you can log in to all services with the following user ID / password.
 * user001 / password
 
 
-### How To Change LDAP Manager Password
-
-1. Execute the following command.
-
-```
-docker-compose exec work adminpassmod new_password
-```
-
-2. Modify LDAP_MANAGER_PASSWORD value in .env file to new one.
-
-* .env
-
-```
-LDAP_MANAGER_PASSWORD=new_password
-```
-
-3. Execute the following command.
-
-```
-docker-compose up -d
-```
-
-
 ### Backup
 
 1. Put backup.sh in the directory where you want to save the backup files.
