@@ -13,18 +13,18 @@ fi
 
 do_restore() {
   for restore_file in $(ls ${BACKUP_DIR}); do
-    if [ $(echo $restore_file | grep -e "${VOLUME_PREFIX}") ]; then
+    if [ $(echo $restore_file | grep -e "${VOLUME_PREFIX}") ] && [ $(echo $restore_file | grep -e ".tar") ]; then
         volume_name=${restore_file%.*}
         log "Start restore ${volume_name}."
 
         docker run --rm \
             -v ${volume_name}:/target \
             -v ${BACKUP_DIR}:/backup \
-            ubuntu bash -c 'tar xvf /backup/'${file}' -C /target'
+            ubuntu bash -c 'tar xvf /backup/'${restore_file}' -C /target'
     fi
   done
 
-    log "End all restore in ${BACKUP_DIR} $(ls -hkl ${BACKUP_DIR})"
+    log "End all restore in ${BACKUP_DIR} $(docker volume ls)"
 }
 
 docker-compose stop
