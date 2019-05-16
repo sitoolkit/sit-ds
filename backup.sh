@@ -4,24 +4,15 @@
 # Backup files are stored in the directory specified by the first argument
 # and hold 7 generations.
 
+ source ./common.sh 
 
 BACKUP_ROOT="${1:-$(cd $(dirname $0);pwd)/backup}"
 
-
-log() {
-    echo "$1"
-    logger -i -t 'sit-ds-backup' "$1"
-}
-
-
 do_backup() {
-    readonly VOLUME_PREFIX='sit-ds_'
-    readonly BACKUP_VOLUMES=(
-        "ci_data" "dbms_data" "its_data" "ldap_conf"
-        "ldap_data" "sca_data" "scm_data")
+    readonly VOLUME_PREFIX=${COMMON_VOLUME_PREFIX}
+    readonly BACKUP_VOLUMES=${COMMON_VOLUMES[@]}
     readonly TIMESTAMP="$(date +%Y%m%d_%H%M%S)"
     readonly LOCAL_BACKUP_DIR="${BACKUP_ROOT}/${TIMESTAMP}"
-
 
     for backup_volume in ${BACKUP_VOLUMES[@]}; do
         volume_name=${VOLUME_PREFIX}${backup_volume}
@@ -31,7 +22,7 @@ do_backup() {
             -v ${volume_name}:/target \
             -v ${LOCAL_BACKUP_DIR}:/backup \
             ubuntu \
-            tar cf /backup/${backup_volume}.tar -C /target .
+            tar cf /backup/${volume_name}.tar -C /target .
     done
 
     log "End all backup in ${LOCAL_BACKUP_DIR} $(ls -hkl ${LOCAL_BACKUP_DIR})"
