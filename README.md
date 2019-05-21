@@ -108,3 +108,15 @@ Then you can log in to all services with the following user ID / password.
     - dbms_data.tar
       :
 ```
+
+### Restore
+
+1. Execute restore.sh specifying the path of the directory that contains the backup file you want to restore.
+   Read and restore tar file of "sit-ds_" prefix of specified directory.
+
+```
+git clone https://github.com/sitoolkit/sit-ds.git
+cd sit-ds
+./restore.sh /path/to/backup/directory/yyyymmdd_hhmmss
+docker-compose up -d
+```
