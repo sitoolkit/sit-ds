@@ -6,6 +6,12 @@
 
 BACKUP_ROOT="${1:-$(cd $(dirname $0);pwd)/backup}"
 
+log() {
+    echo "$1"
+    logger -i -t 'sit-ds-backup' "$1"
+}
+
+
 do_backup() {
   readonly VOLUME_PREFIX='sit-ds_'
   readonly BACKUP_VOLUMES=(
@@ -16,7 +22,7 @@ do_backup() {
 
   for backup_volume in ${BACKUP_VOLUMES[@]}; do
     volume_name=${VOLUME_PREFIX}${backup_volume}
-    echo "Start backup ${volume_name} to ${LOCAL_BACKUP_DIR}"
+    log "Start backup ${volume_name} to ${LOCAL_BACKUP_DIR}"
 
     docker run --rm \
       -v ${volume_name}:/target \
@@ -25,7 +31,7 @@ do_backup() {
       tar cf /backup/${volume_name}.tar -C /target .
   done
 
-  echo "End all backup in ${LOCAL_BACKUP_DIR} $(ls -hkl ${LOCAL_BACKUP_DIR})"
+  log "End all backup in ${LOCAL_BACKUP_DIR} $(ls -hkl ${LOCAL_BACKUP_DIR})"
 }
 
 
@@ -35,7 +41,7 @@ readonly BACKUP_DIR_NAMES=("$(ls -r ${BACKUP_ROOT})")
 readonly BACKUP_DIR_LIMIT=7
 dir_count=1
 
-  echo "Check backup history in ${BACKUP_ROOT} $(ls -hkl ${BACKUP_ROOT})"
+  log "Check backup history in ${BACKUP_ROOT} $(ls -hkl ${BACKUP_ROOT})"
 
   for backup_dir_name in ${BACKUP_DIR_NAMES}; do
 
