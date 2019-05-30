@@ -1,8 +1,8 @@
-No.,項目名,操作,ロケーター形式,ロケーター,データ形式,スクリーンショット,ブレークポイント,ケース_000,ケース_001
-1,startUrl,open,,/gitbucket/signin?redirect=%2F,,,,y,y
-2,userId,input,id,userName,,,,root,user001
-3,password,input,id,password,,,,root,password
-4,login,click,css,input.btn.btn-success,,前,,y,y
-5,clickDropDown,click,css,li.dropdown.notifications-menu:nth-child(2) > a,,前,,y,y
-6,viewAccount,click,link,Your profile,,前,,y,y
-7,verifyLogin,verify,css,div.pull-left.info p,,後,,root,user001
+No.,項目名,操作,ロケーター形式,ロケーター,データ形式,スクリーンショット,ブレークポイント,ケース_001
+1,startUrl,open,,/gitbucket/signin?redirect=%2F,,,,y
+2,userId,input,id,userName,,,,"#{T(java.lang.System).getProperty(""userId"")}"
+3,password,input,id,password,,,,"#{T(java.lang.System).getProperty(""password"")}"
+4,login,click,css,input.btn.btn-success,,前,,y
+5,clickDropDown,click,css,li.dropdown.notifications-menu:nth-child(2) > a,,前,,y
+6,viewAccount,click,link,Your profile,,前,,y
+7,verifyLogin,verify,css,div.pull-left.info p,,後,,"#{T(java.lang.System).getProperty(""userId"")}"

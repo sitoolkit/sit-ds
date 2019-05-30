@@ -120,3 +120,13 @@ cd sit-ds
 ./restore.sh /path/to/backup/directory/yyyymmdd_hhmmss
 docker-compose up -d
 ```
+
+### End to End Test
+
+Execute the following command.  
+This command performs an End-to-End Test with a username and password.  
+End-to-End Test reads and executes csv files stored in the /sit-ds/e2etest/testscript directory.  
+```
+cd /sit-ds/e2etest
+mvnw verify -DuserId=user001 -Dpassword=password
+```
