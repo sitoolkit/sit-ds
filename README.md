@@ -87,6 +87,16 @@ Then you can log in to all services with the following user ID / password.
 
 * user001 / password
 
+### End to End Test
+
+1. Execute the following command.  
+
+   This command performs an End-to-End Test with a username and password.  
+    End-to-End Test reads and executes csv files stored in the /sit-ds/e2etest/testscript directory.  
+```
+cd /sit-ds/e2etest
+mvnw verify -DuserId=user001 -Dpassword=password
+```
 
 ### Backup
 
@@ -119,20 +129,4 @@ git clone https://github.com/sitoolkit/sit-ds.git
 cd sit-ds
 ./restore.sh /path/to/backup/directory/yyyymmdd_hhmmss
 docker-compose up -d
-```
-
-### End to End Test
-
-1. Execute the following command.  
-
-   This command performs an End-to-End Test with a username and password.  
-    End-to-End Test reads and executes csv files stored in the /sit-ds/e2etest/testscript directory.  
-```
-cd /sit-ds/e2etest
-mvnw verify -DuserId=user001 -Dpassword=password
-```
-However, execute the following command only for SelfServicePasswordTest.
-```
-cd /sit-ds/e2etest
-mvnw verify -DuserId=user001 -Dpassword=password　-Dpassword2=password2
 ```
