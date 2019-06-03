@@ -92,7 +92,7 @@ Then you can log in to all services with the following user ID / password.
 1. Execute the following command.  
 
    This command performs an End-to-End Test with a username and password.  
-    End-to-End Test reads and executes csv files stored in the /sit-ds/e2etest/testscript directory.  
+   Operate the browser automatically according to the created test script.
 ```
 cd /sit-ds/e2etest
 mvnw verify -DuserId=user001 -Dpassword=password
