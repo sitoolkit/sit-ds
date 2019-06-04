@@ -91,13 +91,17 @@ Then you can log in to all services with the following user ID / password.
 
 1. Execute the following command.  
 
-   You can check the operation of all services with the added user ID and password.  
-   The evidence of the operation check result is also output to /e2etest/evidencce/evidencce_yymmsshhmmss.
+   If you execute the following command, automatic test can confirm that the user added above can log in to each service.
 
 ```
-cd /sit-ds/e2etest
+cd e2etest
 mvnw verify -DuserId=user001 -Dpassword=password
 ```
+
+See evidencce/evidencce_yymmsshhmmss/report/failsafe-report.html  
+for the results of the automated test. 
+
+  This automated test is implemented by [Web Tester](https://github.com/sitoolkit/sit-wt-all).
 
 ### Backup
 
