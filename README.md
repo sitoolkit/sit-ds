@@ -91,8 +91,9 @@ Then you can log in to all services with the following user ID / password.
 
 1. Execute the following command.  
 
-   This command performs an End-to-End Test with a username and password.  
-   Operate the browser automatically according to the created test script.
+   You can check the operation of all services with the added user ID and password.  
+   The evidence of the operation check result is also output to /e2etest/evidencce/evidencce_yymmsshhmmss.
+
 ```
 cd /sit-ds/e2etest
 mvnw verify -DuserId=user001 -Dpassword=password
