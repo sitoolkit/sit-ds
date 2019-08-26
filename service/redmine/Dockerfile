@@ -10,6 +10,10 @@ RUN set -eux \
     && tar -xzvf dockerize.tar.gz -C /usr/local/bin \
     && rm dockerize.tar.gz
 
+RUN cd ${REDMINE_DIR}/plugins \
+    && git clone -b redmine4-support https://github.com/LaurensRietveld/redmine_mentions.git \
+    && rm -r redmine_mentions/.git
+
 COPY config.ru ${REDMINE_DIR}
 COPY tmpl.configuration.yml ${REDMINE_DIR}/config
 
