@@ -16,5 +16,8 @@ RUN cd ${REDMINE_DIR}/plugins \
 
 COPY config.ru ${REDMINE_DIR}
 COPY tmpl.configuration.yml ${REDMINE_DIR}/config
+COPY sub-uri.rb ${REDMINE_DIR}/config
+
+RUN cat ${REDMINE_DIR}/config/sub-uri.rb >> ${REDMINE_DIR}/config/environment.rb
 
 ENTRYPOINT dockerize -template ${REDMINE_DIR}/config/tmpl.configuration.yml:${REDMINE_DIR}/config/configuration.yml -wait tcp://dbms:${DB_PORT} /docker-entrypoint.sh passenger start
