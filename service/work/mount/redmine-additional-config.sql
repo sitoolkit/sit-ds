@@ -61,6 +61,8 @@ ON CONFLICT (id)
 DO NOTHING
 ;
 
+SELECT pg_catalog.setval('public.auth_sources_id_seq', 1, true);
+SELECT pg_catalog.setval('public.settings_id_seq', 5, true);
 
 SELECT *
 FROM auth_sources;
