@@ -8,7 +8,7 @@ ENV PATH $PATH:/tmp
 WORKDIR /tmp
 
 CMD dockerize -template /mnt:/tmp \
-  chmod u+x /tmp/init.sh ;\
-  chmod u+x /tmp/ldapmod ;\
-  /tmp/init.sh ;\
+  chmod u+x /tmp/init.sh &&\
+  chmod u+x /tmp/ldapmod &&\
+  /tmp/init.sh &&\
   tail -f /dev/null
