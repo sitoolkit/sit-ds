@@ -11,7 +11,7 @@ RUN set -eux \
     && tar -xzvf dockerize.tar.gz -C /usr/local/bin \
     && rm dockerize.tar.gz \
     && : "Install ldap client" \
-    && apt-get update && apt-get install libldap2-dev \
+    && apt-get -y update && apt-get -y install libldap2-dev \
     && rm -r /var/lib/apt/lists/* \
     && docker-php-ext-install -j$(nproc) ldap \
     && : "Install ssp" \
