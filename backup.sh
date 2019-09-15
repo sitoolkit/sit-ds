@@ -28,7 +28,7 @@ do_backup() {
       -v ${volume_name}:/target \
       -v ${LOCAL_BACKUP_DIR}:/backup \
       ubuntu \
-      tar cf /backup/${volume_name}.tar -C /target .
+      tar cfz /backup/${volume_name}.tar.gz -C /target .
   done
 
   log "End all backup in ${LOCAL_BACKUP_DIR} $(ls -hkl ${LOCAL_BACKUP_DIR})"
