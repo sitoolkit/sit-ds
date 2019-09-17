@@ -18,7 +18,10 @@ do_backup() {
     "ci_data" "dbms_data" "its_data" "ldap_conf"
     "ldap_data" "sca_data" "scm_data")
   readonly TIMESTAMP="$(date +%Y%m%d_%H%M%S)"
+  readonly COMMIT_ID="$(git rev-parse HEAD)"
   readonly LOCAL_BACKUP_DIR="${BACKUP_ROOT}/${TIMESTAMP}"
+  readonly COMMIT_ID_FILE="${LOCAL_BACKUP_DIR}/commit-id.txt"
+  echo ${COMMIT_ID} > ${COMMIT_ID_FILE}
 
   for backup_volume in ${BACKUP_VOLUMES[@]}; do
     volume_name=${VOLUME_PREFIX}${backup_volume}
