@@ -21,7 +21,6 @@ do_backup() {
   readonly COMMIT_ID="$(git rev-parse HEAD)"
   readonly LOCAL_BACKUP_DIR="${BACKUP_ROOT}/${TIMESTAMP}"
   readonly COMMIT_ID_FILE="${LOCAL_BACKUP_DIR}/commit-id.txt"
-  echo ${COMMIT_ID} > ${COMMIT_ID_FILE}
 
   for backup_volume in ${BACKUP_VOLUMES[@]}; do
     volume_name=${VOLUME_PREFIX}${backup_volume}
@@ -33,6 +32,8 @@ do_backup() {
       ubuntu \
       tar cfz /backup/${volume_name}.tar.gz -C /target .
   done
+  
+  echo ${COMMIT_ID} > ${COMMIT_ID_FILE}
 
   log "End all backup in ${LOCAL_BACKUP_DIR} $(ls -hkl ${LOCAL_BACKUP_DIR})"
 }
