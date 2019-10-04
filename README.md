@@ -92,11 +92,10 @@ Then you can log in to all services with the following user ID / password.
 The following command confirms that the user added above can log in to each service by the automated test.
 
 ```
-cd e2etest
-mvnw verify -DuserId=user001 -Dpassword=password
+docker-compose exec e2etest ./mvnw verify -DuserId=user001 -Dpassword=password
 ```
 
-See evidencce/evidencce_yymmsshhmmss/report/failsafe-report.html for the results of the automated test. 
+See e2etest/evidence/evidence_yyyymmddhhmmss/report/failsafe-report.html for the results of the automated test. 
 
 This automated test is implemented by [Web Tester](https://github.com/sitoolkit/sit-wt-all).
 
