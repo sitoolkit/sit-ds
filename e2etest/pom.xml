@@ -23,7 +23,9 @@
 
   <properties>
     <driver.type>chrome</driver.type>
-    <baseUrl>http://localhost</baseUrl>
+    <baseUrl>http://host.docker.internal</baseUrl>
+    <headless>true</headless>
+    <browser.options>--no-sandbox,--disable-dev-shm-usage</browser.options>
     <maven.javadoc.skip>true</maven.javadoc.skip>
   </properties>
 

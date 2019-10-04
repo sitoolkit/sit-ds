@@ -189,6 +189,19 @@ services:
     volumes:
       - ./service/work/mount:/mnt
 
+  e2etest:
+    build:
+      context: ./e2etest
+      args:
+        VERSION: ${VERSION_UBUNTU}
+    env_file:
+      - .env
+    environment:
+        TZ: ${OS_TIMEZONE}
+    volumes:
+      - ./e2etest:/mnt
+    working_dir: /mnt
+
 volumes:
   ci_data:
   dbms_data:

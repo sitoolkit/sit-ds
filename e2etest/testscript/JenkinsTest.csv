@@ -1,6 +1,6 @@
-No.,項目名,操作,ロケーター形式,ロケーター,データ形式,スクリーンショット,ブレークポイント,ケース_001
+No.,ItemName,Operation,LocatorStyle,Locator,DataStyle,Screenshot,Breakpoint,Case_001
 1,startUrl,open,,jenkins/login?from=%2Fjenkins%2F,,,,y
 2,userId,input,id,j_username,,,,"#{T(java.lang.System).getProperty(""userId"")}"
 3,password,input,name,j_password,,,,"#{T(java.lang.System).getProperty(""password"")}"
-4,signIn,click,name,Submit,,前,,y
-5,verifyLogin,verify,css,#header div.login a.model-link.inside.inverse b,,後,,"#{T(java.lang.System).getProperty(""userId"")}"
+4,signIn,click,name,Submit,,before,,y
+5,verifyLogin,verify,css,#header div.login a.model-link.inside.inverse b,,after,,"#{T(java.lang.System).getProperty(""userId"")}"
