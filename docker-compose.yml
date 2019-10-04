@@ -83,6 +83,7 @@ services:
       - dbms
       - kvs
     environment:
+      GITBUCKET_BASE_URL: ${PUBLIC_PROTOCOL}://${PUBLIC_HOST}/gitbucket
       GITBUCKET_DB_URL: ${DB_JDBC_URL}/gitbucket
       GITBUCKET_DB_USER: gitbucket
       GITBUCKET_DB_PASSWORD: gitbucket
