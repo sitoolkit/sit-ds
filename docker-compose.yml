@@ -200,8 +200,6 @@ services:
         TZ: ${OS_TIMEZONE}
     volumes:
       - ./e2etest:/mnt
-      - ~/.m2:/root/.m2
-    # - ${HOME}${USERPROFILE}/.m2:/root/.m2
     working_dir: /mnt
 
 volumes:
