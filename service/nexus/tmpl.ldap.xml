@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ldapConfiguration>
+  <version>2.8.0</version>
+  <connectionInfo>
+    <searchBase>{{ .Env.LDAP_ROOT_DN }}</searchBase>
+    <authScheme>none</authScheme>
+    <protocol>ldap</protocol>
+    <host>{{ .Env.LDAP_HOST }}</host>
+    <port>{{ .Env.LDAP_PORT }}</port>
+  </connectionInfo>
+  <userAndGroupConfig>
+    <emailAddressAttribute>{{ .Env.LDAP_MAIL_ATTRIBUTE }}</emailAddressAttribute>
+    <userIdAttribute>{{ .Env.LDAP_LOGIN_ATTRIBUTE }}</userIdAttribute>
+    <userObjectClass>inetOrgPerson</userObjectClass>
+    <userBaseDn>{{ .Env.LDAP_ROOT_DN }}</userBaseDn>
+    <userRealNameAttribute>{{ .Env.LDAP_LOGIN_ATTRIBUTE }}</userRealNameAttribute>
+  </userAndGroupConfig>
+</ldapConfiguration>

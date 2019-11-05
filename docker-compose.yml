@@ -162,6 +162,22 @@ services:
     volumes:
       - its_data:/usr/src/redmine/files
 
+  nexus:
+    build:
+      context: ./service/nexus
+      args:
+        VERSION: ${VERSION_NEXUS}
+    depends_on:
+      - ldap
+    env_file:
+      - .env
+    environment:
+      TZ: ${OS_TIMEZONE}
+    ports:
+      - 8081:8081
+    volumes:
+      - nexus_data:/sonatype-work
+
   proxy:
     command: [nginx-debug, '-g', 'daemon off;']
     depends_on:
@@ -169,6 +185,7 @@ services:
       - ci
       - sca
       - its
+      - nexus
     environment:
         TZ: ${OS_TIMEZONE}
     image: nginx:${VERSION_PROXY}
@@ -211,3 +228,4 @@ volumes:
   ldap_data:
   sca_data:
   scm_data:
+  nexus_data:

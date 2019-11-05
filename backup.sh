@@ -16,7 +16,7 @@ do_backup() {
   readonly VOLUME_PREFIX='sit-ds_'
   readonly BACKUP_VOLUMES=(
     "ci_data" "dbms_data" "its_data" "ldap_conf"
-    "ldap_data" "sca_data" "scm_data")
+    "ldap_data" "sca_data" "scm_data" "nexus_data")
   readonly TIMESTAMP="$(date +%Y%m%d_%H%M%S)"
   readonly COMMIT_ID="$(git rev-parse HEAD)"
   readonly LOCAL_BACKUP_DIR="${BACKUP_ROOT}/${TIMESTAMP}"
