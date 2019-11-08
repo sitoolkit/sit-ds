@@ -162,6 +162,20 @@ services:
     volumes:
       - its_data:/usr/src/redmine/files
 
+  repos:
+    build:
+      context: ./service/repos
+      args:
+        VERSION: ${VERSION_REPOS}
+    depends_on:
+      - ldap
+    env_file:
+      - .env
+    environment:
+      TZ: ${OS_TIMEZONE}
+    volumes:
+      - repos_data:/var/opt/jfrog/artifactory
+
   proxy:
     command: [nginx-debug, '-g', 'daemon off;']
     depends_on:
@@ -211,3 +225,4 @@ volumes:
   ldap_data:
   sca_data:
   scm_data:
+  repos_data:
