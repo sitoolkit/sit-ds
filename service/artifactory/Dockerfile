@@ -11,10 +11,12 @@ RUN set -eux \
     && tar -xzvf dockerize.tar.gz -C /usr/bin \
     && rm dockerize.tar.gz
 
-COPY tmpl.artifactory.config.import.xml /tmp
+COPY tmpl.ldap-setting.xml /tmp
+COPY update-setting.sh /
+RUN chmod a+x /update-setting.sh
 
 USER artifactory
-ENTRYPOINT mkdir -p /var/opt/jfrog/artifactory/etc && \
-  dockerize \
-  -template /tmp/tmpl.artifactory.config.import.xml:/var/opt/jfrog/artifactory/etc/artifactory.config.import.xml \
+ENTRYPOINT dockerize \
+  -template /tmp/tmpl.ldap-setting.xml:/tmp/ldap-setting.xml \
+  /update-setting.sh & \
   /entrypoint-artifactory.sh

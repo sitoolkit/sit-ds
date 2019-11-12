@@ -7,7 +7,7 @@ It setups the following tools with Docker and makes them available immediately.
 * Continuous Integration : Jenkins
 * Static Code Analysis : SonarQube
 * Issue Tracking System : Redmine
-* Repository Manager : Artifactory
+* Artifact Repository Manager : Artifactory
 
 Each server tool is configured as a service of Docker Compose.
 Each service has the following settings necessary for team development.
