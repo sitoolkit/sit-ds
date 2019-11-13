@@ -26,8 +26,11 @@ getSettings() {
 
 updateSettings() {
   sed -e "s|^ *${NO_LDAP_MSG}$|`cat ${LDAP_SETTING}`|" ${CURRENT_SETTING} > ${UPDATE_SETTING}
-  # TODO Post
-  echo "TODO update"
+  wget --header="${AUTH_HEADER}" \
+    --header="Content-Type: application/xml" \
+    --post-file ${UPDATE_SETTING} \
+    -O - \
+    ${BASE_URL}/api/system/configuration
 }
 
 waitArtifactoryRunning

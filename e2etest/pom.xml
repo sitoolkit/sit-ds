@@ -21,6 +21,19 @@
     <version>3.0.0-beta.2-SNAPSHOT</version>
   </parent>
 
+  <repositories>
+    <repository>
+      <id>sonatype-nexus-snapshots</id>
+      <name>Snapshot Repository</name>
+      <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+    <repository>
+      <id>sonatype-nexus-staging</id>
+      <name>Maven Central Repository</name>
+      <url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+    </repository>
+  </repositories>
+
   <properties>
     <driver.type>chrome</driver.type>
     <baseUrl>http://host.docker.internal</baseUrl>

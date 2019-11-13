@@ -166,7 +166,8 @@ services:
     build:
       context: ./service/artifactory
       args:
-        VERSION: ${VERSION_ARM}
+        VERSION_ARM: ${VERSION_ARM}
+        VERSION_UBUNTU: ${VERSION_UBUNTU}
     depends_on:
       - ldap
       - dbms
