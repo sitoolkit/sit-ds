@@ -14,4 +14,6 @@ RUN set -eux \
     && apt-get -y install --no-install-recommends openjdk-11-jre-headless \
     && rm -rf /var/lib/apt/lists/*
 
+COPY settings.xml /root/.m2/
+
 CMD ["tail", "-f", "/dev/null"]
