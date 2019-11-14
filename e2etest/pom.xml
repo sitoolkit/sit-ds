@@ -31,5 +31,12 @@
 
   <build>
     <defaultGoal>clean verify</defaultGoal>
+    <plugins>
+      <plugin>
+        <groupId>io.sitoolkit.wt</groupId>
+        <artifactId>sit-wt-maven-plugin</artifactId>
+        <version>3.0.0-beta.2-SNAPSHOT</version>
+      </plugin>
+    </plugins>
   </build>
 </project>

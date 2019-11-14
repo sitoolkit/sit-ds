@@ -7,6 +7,7 @@ It setups the following tools with Docker and makes them available immediately.
 * Continuous Integration : Jenkins
 * Static Code Analysis : SonarQube
 * Issue Tracking System : Redmine
+* Artifact Repository Manager : Artifactory
 
 Each server tool is configured as a service of Docker Compose.
 Each service has the following settings necessary for team development.
@@ -49,7 +50,8 @@ The endpoint URL to each service and the connection information of the admin use
 | GitBucket             | http://localhost/gitbucket                | root  / root                       |
 | Jenkins               | http://localhost/jenkins                  | admin / admin                      |
 | SonarQube             | http://localhost/sonarqube                | admin / admin                      |
-| Redmne                | http://localhost/redmine                  | admin / admin                      |
+| Redmine               | http://localhost/redmine                  | admin / admin                      |
+| Artifactory           | http://localhost/artifactory              | admin / password                   |
 | PostgreSQL            | jdbc:postgresql://localhost:5432/postgres | postgres / postgres                |
 | Self Service Password | http://localhost/passchg                  | admin / admin                      |
 | phpLDAPAdmin          | https://localhost:6443                    | cn=admin,dc=example,dc=org / admin |
@@ -79,7 +81,7 @@ userPassword: password
 2. Execute the following command.
 
 ```
-docker cp add-users.ldiff sit-ds_work_1:/tmp
+docker cp add-users.ldif sit-ds_work_1:/tmp
 docker-compose exec work ldapmod add-users.ldif
 ```
 

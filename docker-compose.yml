@@ -162,6 +162,25 @@ services:
     volumes:
       - its_data:/usr/src/redmine/files
 
+  arm:
+    build:
+      context: ./service/artifactory
+      args:
+        VERSION_ARM: ${VERSION_ARM}
+        VERSION_UBUNTU: ${VERSION_UBUNTU}
+    depends_on:
+      - ldap
+      - dbms
+    env_file:
+      - .env
+    environment:
+      TZ: ${OS_TIMEZONE}
+      DB_TYPE: postgresql
+      DB_USER: artifactory
+      DB_PASSWORD: artifactory
+    volumes:
+      - arm_data:/var/opt/jfrog/artifactory
+
   proxy:
     command: [nginx-debug, '-g', 'daemon off;']
     depends_on:
@@ -169,6 +188,7 @@ services:
       - ci
       - sca
       - its
+      - arm
     environment:
         TZ: ${OS_TIMEZONE}
     image: nginx:${VERSION_PROXY}
@@ -211,3 +231,4 @@ volumes:
   ldap_data:
   sca_data:
   scm_data:
+  arm_data:
