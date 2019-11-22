@@ -3,5 +3,6 @@
 2,userId,input,id,login,,,,"#{T(java.lang.System).getProperty(""userId"")}"
 3,password,input,id,password,,,,"#{T(java.lang.System).getProperty(""password"")}"
 4,login,click,css,#login_form button.button,,before,,y
-5,viewAccount,open,,sonarqube/account,,before,,y
+5,wait,wait,css,#global-navigation > div > div > ul:nth-child(2) > li:nth-child(1) > a,,,,Projects
+6,viewAccount,open,,sonarqube/account,,before,,y
 7,verifyLogin,verify,id,login,,after,,"#{T(java.lang.System).getProperty(""userId"")}"
