@@ -5,6 +5,7 @@ apache-httpcomponents-client-4-api
 authentication-tokens
 bouncycastle-api
 branch-api
+build-name-setter
 build-timeout
 cloudbees-folder
 command-launcher
