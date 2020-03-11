@@ -11,6 +11,7 @@ services:
     volumes:
       - ldap_data:/var/lib/ldap
       - ldap_conf:/etc/ldap/slapd.d
+    restart: always
 
   ldapadmin:
     depends_on:
@@ -21,6 +22,7 @@ services:
     environment:
       PHPLDAPADMIN_LDAP_HOSTS: ldap
       TZ: ${OS_TIMEZONE}
+    restart: always
 
   smtp:
     environment:
@@ -30,6 +32,7 @@ services:
       MAIL_RELAY_PASS: ${MAIL_RELAY_PASS}
       TZ: ${OS_TIMEZONE}
     image: tecnativa/postfix-relay
+    restart: always
 
   passchg:
     build:
@@ -47,6 +50,7 @@ services:
       TZ: ${OS_TIMEZONE}
     ports:
       - 81:80
+    restart: always
 
   kvs:
     environment:
@@ -180,6 +184,7 @@ services:
       DB_PASSWORD: artifactory
     volumes:
       - arm_data:/var/opt/jfrog/artifactory
+    restart: always
 
   proxy:
     command: [nginx-debug, '-g', 'daemon off;']
@@ -197,6 +202,7 @@ services:
     volumes:
       - ./service/nginx/mount/conf:/etc/nginx/conf.d
       - ./service/nginx/mount/html:/usr/share/nginx/html
+    restart: always
 
   work:
     build:
@@ -209,6 +215,7 @@ services:
         TZ: ${OS_TIMEZONE}
     volumes:
       - ./service/work/mount:/mnt
+    restart: always
 
   e2etest:
     build:
@@ -222,6 +229,7 @@ services:
     volumes:
       - ./e2etest:/mnt
     working_dir: /mnt
+    restart: always
 
 volumes:
   ci_data:
