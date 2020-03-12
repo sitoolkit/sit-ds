@@ -1,3 +1,5 @@
-*             text=auto
-*.sh          eol=lf
-ldapmod       eol=lf
+*                     text=auto
+*.sh                  eol=lf
+ldapmod               eol=lf
+mvnw                  eol=lf
+tmpl.ldap-setting.xml eol=lf
