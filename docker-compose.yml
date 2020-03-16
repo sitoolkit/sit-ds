@@ -18,7 +18,7 @@ services:
       - ldap
     image : osixia/phpldapadmin:${VERSION_LDAPADMIN}
     ports:
-      - 6443:443
+      - 17443:443
     environment:
       PHPLDAPADMIN_LDAP_HOSTS: ldap
       TZ: ${OS_TIMEZONE}

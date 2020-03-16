@@ -54,7 +54,7 @@ The endpoint URL to each service and the connection information of the admin use
 | Artifactory           | http://localhost/artifactory              | admin / password                   |
 | PostgreSQL            | jdbc:postgresql://localhost:5432/postgres | postgres / postgres                |
 | Self Service Password | http://localhost/passchg                  | admin / admin                      |
-| phpLDAPAdmin          | https://localhost:6443                    | cn=admin,dc=example,dc=org / admin |
+| phpLDAPAdmin          | https://localhost:17443                   | cn=admin,dc=example,dc=org / admin |
 
 * *1 For Docker Toolbox, it is an IP address that can be confirmed with docker-machine ls command instead of localhost.
 
