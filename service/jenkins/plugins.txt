@@ -19,6 +19,7 @@ email-ext
 git
 git-client
 git-server
+gitbucket
 github
 github-api
 github-branch-source
