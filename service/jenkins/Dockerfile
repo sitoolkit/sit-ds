@@ -1,7 +1,8 @@
 ARG VERSION
 FROM jenkins/jenkins:${VERSION}
 
-ENV JAVA_OPTS=-Djenkins.install.runSetupWizard=false \
+ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false \
+      -Dhudson.model.DirectoryBrowserSupport.CSP=\"sandbox allow-scripts allow-popups;\"" \
     JENKINS_OPTS=--prefix=/jenkins
 
 USER jenkins
