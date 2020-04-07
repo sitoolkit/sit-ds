@@ -53,6 +53,7 @@ pipeline-stage-step
 pipeline-stage-tags-metadata
 pipeline-stage-view
 plain-credentials
+postbuild-task
 resource-disposer
 scm-api
 script-security
