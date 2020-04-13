@@ -2,7 +2,7 @@
     <ldapSetting>\
         <key>ldap</key>\
         <enabled>true</enabled>\
-        <ldapUrl>ldap://{{ .Env.LDAP_HOST }}:{{ .Env.LDAP_PORT }}/{{ .Env.LDAP_ROOT_DN }}</ldapUrl>\
+        <ldapUrl>ldap://{{ .Env.LDAP_HOST }}:389/{{ .Env.LDAP_ROOT_DN }}</ldapUrl>\
         <userDnPattern>{{ .Env.LDAP_LOGIN_ATTRIBUTE }}={0}</userDnPattern>\
         <search>\
             <searchFilter>{{ .Env.LDAP_LOGIN_ATTRIBUTE }}={0}</searchFilter>\

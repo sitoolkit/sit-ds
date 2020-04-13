@@ -4,7 +4,7 @@ set -eux
 
 readonly INIT_FILE='/tmp/.init'
 
-dockerize -wait tcp://ldap:${LDAP_PORT} -wait tcp://its:${ITS_PORT} -timeout 60s
+dockerize -wait tcp://ldap:389 -wait tcp://its:3000 -timeout 60s
 
 if [[ -e ${INIT_FILE} ]]; then
 

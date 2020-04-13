@@ -2,13 +2,13 @@ INSERT INTO auth_sources
   (id, "type", name, host, port,
   account, account_password, base_dn,
   attr_login, attr_firstname, attr_lastname, attr_mail, onthefly_register, tls, "filter", timeout)
-VALUES(1, 'AuthSourceLdap', 'LDAP', '{{ .Env.LDAP_HOST  }}', {{ .Env.LDAP_PORT }},
+VALUES(1, 'AuthSourceLdap', 'LDAP', '{{ .Env.LDAP_HOST  }}', 389,
   '{{ .Env.LDAP_MANAGER_DN  }}', '{{ .Env.LDAP_MANAGER_PASSWORD  }}', '{{ .Env.LDAP_ROOT_DN  }}', 
   '{{ .Env.LDAP_LOGIN_ATTRIBUTE }}', 'givenName', 'sn', '{{ .Env.LDAP_MAIL_ATTRIBUTE }}', true, false, '', NULL)
 ON CONFLICT (id)
 DO UPDATE SET
   host = '{{ .Env.LDAP_HOST  }}',
-  port =  {{ .Env.LDAP_PORT }},
+  port = 389,
   account = '{{ .Env.LDAP_MANAGER_DN  }}',
   account_password = '{{ .Env.LDAP_MANAGER_PASSWORD  }}',
   base_dn = '{{ .Env.LDAP_ROOT_DN  }}',
