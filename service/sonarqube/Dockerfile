@@ -17,4 +17,4 @@ WORKDIR $SONARQUBE_HOME
 
 COPY tmpl.sonar.properties /opt/sonarqube/conf
 
-ENTRYPOINT dockerize -template /opt/sonarqube/conf/tmpl.sonar.properties:/opt/sonarqube/conf/sonar.properties -wait tcp://dbms:5432 ./bin/run.sh -Dsonar.web.context=/sonarqube
+ENTRYPOINT dockerize -template /opt/sonarqube/conf/tmpl.sonar.properties:/opt/sonarqube/conf/sonar.properties -wait tcp://${DB_HOST}:${DB_PORT} ./bin/run.sh -Dsonar.web.context=/sonarqube
