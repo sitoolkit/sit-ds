@@ -48,6 +48,7 @@ INSERT INTO settings
   (id, name, value, updated_on)
 VALUES
   (4, 'protocol', '{{ .Env.PUBLIC_PROTOCOL }}', current_timestamp)
+ON CONFLICT (id)
 DO UPDATE SET
   value = '{{ .Env.PUBLIC_PROTOCOL }}',
   updated_on = current_timestamp
