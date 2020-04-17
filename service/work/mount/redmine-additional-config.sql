@@ -8,7 +8,7 @@ VALUES(1, 'AuthSourceLdap', 'LDAP', '{{ .Env.LDAP_HOST  }}', {{ .Env.LDAP_PORT }
 ON CONFLICT (id)
 DO UPDATE SET
   host = '{{ .Env.LDAP_HOST  }}',
-  port =  {{ .Env.LDAP_PORT }},
+  port = {{ .Env.LDAP_PORT }},
   account = '{{ .Env.LDAP_MANAGER_DN  }}',
   account_password = '{{ .Env.LDAP_MANAGER_PASSWORD  }}',
   base_dn = '{{ .Env.LDAP_ROOT_DN  }}',

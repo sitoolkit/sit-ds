@@ -17,4 +17,4 @@ RUN set -eux \
 
 COPY tmpl.gitbucket.conf ${GITBUCKET_HOME}
 
-CMD dockerize -no-overwrite -template ${GITBUCKET_HOME}/tmpl.gitbucket.conf:${GITBUCKET_HOME}/gitbucket.conf -wait tcp://dbms:${DB_PORT} java -jar /opt/gitbucket.war --prefix gitbucket
+CMD dockerize -no-overwrite -template ${GITBUCKET_HOME}/tmpl.gitbucket.conf:${GITBUCKET_HOME}/gitbucket.conf -wait tcp://${DB_HOST}:${DB_PORT} java -jar /opt/gitbucket.war
