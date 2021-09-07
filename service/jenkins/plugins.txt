@@ -1,4 +1,5 @@
 ace-editor
+allure-jenkins-plugin
 ant
 antisamy-markup-formatter
 apache-httpcomponents-client-4-api
@@ -7,6 +8,7 @@ bouncycastle-api
 branch-api
 build-name-setter
 build-timeout
+build-timestamp
 cloudbees-folder
 command-launcher
 credentials
@@ -16,6 +18,7 @@ docker-commons
 docker-workflow
 durable-task
 email-ext
+external-monitor-job
 git
 git-client
 git-server
@@ -27,6 +30,7 @@ gradle
 handlebars
 htmlpublisher
 jackson2-api
+javadoc
 jdk-tool
 jquery-detached
 jsch
@@ -54,6 +58,7 @@ pipeline-stage-tags-metadata
 pipeline-stage-view
 plain-credentials
 postbuild-task
+PrioritySorter
 resource-disposer
 scm-api
 script-security
@@ -63,6 +68,8 @@ structs
 subversion
 timestamper
 token-macro
+trilead-api
+windows-slaves
 workflow-aggregator
 workflow-api
 workflow-basic-steps
