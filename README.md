@@ -8,6 +8,7 @@ It setups the following tools with Docker and makes them available immediately.
 * Static Code Analysis : SonarQube
 * Issue Tracking System : Redmine
 * Artifact Repository Manager : Artifactory
+* Wiki : [Wiki.js](https://js.wiki/)
 
 Each server tool is configured as a service of Docker Compose.
 Each service has the following settings necessary for team development.
@@ -55,9 +56,10 @@ The endpoint URL to each service and the connection information of the admin use
 | PostgreSQL            | jdbc:postgresql://localhost:5432/postgres | postgres / postgres                |
 | Self Service Password | http://localhost/passchg                  | admin / admin                      |
 | phpLDAPAdmin          | https://localhost:17443                   | cn=admin,dc=example,dc=org / admin |
+| Wiki.js               | https://wiki.localhost                    | - (*2)                             |
 
 * *1 For Docker Toolbox, it is an IP address that can be confirmed with docker-machine ls command instead of localhost.
-
+* *2 You can create administrator account when first access on brower.
 
 ### How To Add Users
 

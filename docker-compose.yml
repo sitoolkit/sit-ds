@@ -196,6 +196,7 @@ services:
       - sca
       - its
       - arm
+      - wiki
     env_file:
       - .env
     ports:
@@ -229,6 +230,24 @@ services:
     working_dir: /mnt
     restart: always
 
+  wiki:
+    env_file:
+      - .env
+    image: requarks/wiki:${VERSION_WIKI}
+    depends_on:
+      - ldap
+      - dbms
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: wikijs
+      DB_PASS: wikijs
+      DB_NAME: wikijs
+      TZ: ${OS_TIMEZONE}
+    volumes:
+      - wiki_data:/wiki
+
 volumes:
   ci_data:
   dbms_data:
@@ -238,3 +257,4 @@ volumes:
   sca_data:
   scm_data:
   arm_data:
+  wiki_data:
