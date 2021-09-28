@@ -237,6 +237,7 @@ services:
     depends_on:
       - ldap
       - dbms
+      - search-engine
     environment:
       DB_TYPE: postgres
       DB_HOST: ${DB_HOST}
@@ -248,6 +249,15 @@ services:
     volumes:
       - wiki_data:/wiki
 
+  search-engine:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
+    environment:
+      discovery.type: single-node
+    volumes:
+      - search_engine_data:/usr/share/elasticsearch/data
+    entrypoint: >
+      bash -c "elasticsearch-plugin install analysis-kuromoji && docker-entrypoint.sh"
+
 volumes:
   ci_data:
   dbms_data:
@@ -258,3 +268,4 @@ volumes:
   scm_data:
   arm_data:
   wiki_data:
+  search_engine_data:
