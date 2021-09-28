@@ -59,7 +59,7 @@ The endpoint URL to each service and the connection information of the admin use
 | Wiki.js               | https://wiki.localhost                    | - (*2)                             |
 
 * *1 For Docker Toolbox, it is an IP address that can be confirmed with docker-machine ls command instead of localhost.
-* *2 You can create administrator account when first access on brower.
+* *2 You can create administrator account when first access on browser.
 
 ### How To Add Users
 
