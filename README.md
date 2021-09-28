@@ -103,6 +103,12 @@ See e2etest/evidence/evidence_yyyymmddhhmmss/report/failsafe-report.html for the
 
 This automated test is implemented by [Web Tester](https://github.com/sitoolkit/sit-wt-all).
 
+### Wiki.js Configuration
+
+- Authentication: https://docs.requarks.io/auth/ldap
+- SearchEngine: https://docs.requarks.io/en/search/elasticsearch
+  - analyzer: kuromoji
+
 ### Backup
 
 1. Execute backup.sh specifing the directory you want to save backup files.
