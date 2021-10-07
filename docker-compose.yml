@@ -250,7 +250,9 @@ services:
       - wiki_data:/wiki
 
   search-engine:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
+    env_file:
+      - .env
+    image: docker.elastic.co/elasticsearch/elasticsearch:${VERSION_ES}
     environment:
       discovery.type: single-node
     volumes:
