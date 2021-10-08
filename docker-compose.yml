@@ -196,6 +196,7 @@ services:
       - sca
       - its
       - arm
+      - wiki
     env_file:
       - .env
     ports:
@@ -229,6 +230,36 @@ services:
     working_dir: /mnt
     restart: always
 
+  wiki:
+    env_file:
+      - .env
+    image: requarks/wiki:${VERSION_WIKI}
+    depends_on:
+      - ldap
+      - dbms
+      - search-engine
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: wikijs
+      DB_PASS: wikijs
+      DB_NAME: wikijs
+      TZ: ${OS_TIMEZONE}
+    volumes:
+      - wiki_data:/wiki
+
+  search-engine:
+    env_file:
+      - .env
+    image: docker.elastic.co/elasticsearch/elasticsearch:${VERSION_ES}
+    environment:
+      discovery.type: single-node
+    volumes:
+      - search_engine_data:/usr/share/elasticsearch/data
+    entrypoint: >
+      bash -c "elasticsearch-plugin install analysis-kuromoji && docker-entrypoint.sh"
+
 volumes:
   ci_data:
   dbms_data:
@@ -238,3 +269,5 @@ volumes:
   sca_data:
   scm_data:
   arm_data:
+  wiki_data:
+  search_engine_data:

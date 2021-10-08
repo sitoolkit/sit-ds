@@ -8,6 +8,7 @@ It setups the following tools with Docker and makes them available immediately.
 * Static Code Analysis : SonarQube
 * Issue Tracking System : Redmine
 * Artifact Repository Manager : Artifactory
+* Wiki : [Wiki.js](https://js.wiki/)
 
 Each server tool is configured as a service of Docker Compose.
 Each service has the following settings necessary for team development.
@@ -55,9 +56,10 @@ The endpoint URL to each service and the connection information of the admin use
 | PostgreSQL            | jdbc:postgresql://localhost:5432/postgres | postgres / postgres                |
 | Self Service Password | http://localhost/passchg                  | admin / admin                      |
 | phpLDAPAdmin          | https://localhost:17443                   | cn=admin,dc=example,dc=org / admin |
+| Wiki.js               | https://wiki.localhost                    | - (*2)                             |
 
 * *1 For Docker Toolbox, it is an IP address that can be confirmed with docker-machine ls command instead of localhost.
-
+* *2 You can create administrator account when first access on browser.
 
 ### How To Add Users
 
@@ -100,6 +102,12 @@ docker-compose exec e2etest ./mvnw verify -DuserId=user001 -Dpassword=password
 See e2etest/evidence/evidence_yyyymmddhhmmss/report/failsafe-report.html for the results of the automated test. 
 
 This automated test is implemented by [Web Tester](https://github.com/sitoolkit/sit-wt-all).
+
+### Wiki.js Configuration
+
+- Authentication: https://docs.requarks.io/auth/ldap
+- SearchEngine: https://docs.requarks.io/en/search/elasticsearch
+  - analyzer: kuromoji
 
 ### Backup
 
