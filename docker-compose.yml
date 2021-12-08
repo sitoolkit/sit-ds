@@ -77,28 +77,46 @@ services:
       - dbms_data:/var/lib/postgresql/data
 
   scm:
+    image: sameersbn/gitlab:${VERSION_SCM}
     env_file:
       - .env
-    build:
-      context: ./service/gitbucket
-      args:
-        VERSION: ${VERSION_SCM}
     depends_on:
       - ldap
       - smtp
       - dbms
       - kvs
     environment:
-      GITBUCKET_DB_URL: ${DB_JDBC_URL}/gitbucket
-      GITBUCKET_DB_USER: gitbucket
-      GITBUCKET_DB_PASSWORD: gitbucket
-      MAIL_SMTP_HOST: smtp
-      TZ: ${OS_TIMEZONE}
-    # ports:
-    #   - 8081:8080
+      DB_ADAPTER: postgresql
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: gitlab
+      DB_PASS: gitlab
+      DB_NAME: gitlab
+      REDIS_HOST: kvs
+      REDIS_PORT: 6379
+      GITLAB_SECRETS_DB_KEY_BASE: ${GITLAB_SECRETS_DB_KEY_BASE}
+      GITLAB_SECRETS_SECRET_KEY_BASE: ${GITLAB_SECRETS_SECRET_KEY_BASE}
+      GITLAB_SECRETS_OTP_KEY_BASE: ${GITLAB_SECRETS_OTP_KEY_BASE}
+
+      # LDAP
+      LDAP_ENABLED: "true"
+      LDAP_HOST: ${LDAP_HOST}
+      LDAP_BIND_DN: ${LDAP_MANAGER_DN}
+      LDAP_BASE: ${LDAP_ROOT_DN}
+      LDAP_UID: ${LDAP_LOGIN_ATTRIBUTE}
+      LDAP_USER_ATTRIBUTE_USERNAME: ${LDAP_FULLNAME_ATTRIBUTE}
+      LDAP_USER_ATTRIBUTE_MAIL: ${LDAP_MAIL_ATTRIBUTE}
+      LDAP_PASS: ${LDAP_MANAGER_PASSWORD}
+
+      # SMTP
+      SMTP_ENABLED: "true"
+      SMTP_HOST: smtp
+      SMTP_PORT: ${SMTP_PORT}
+      GITLAB_EMAIL: gitlab@${GITLAB_SMTP_DOMAIN}
+      GITLAB_EMAIL_REPLY_TO: ${MAIL_RELAY_USER}
     restart: always
     volumes:
-      - scm_data:/etc/gitbucket
+      - scm_data:/home/git/data:Z
 
   ci:
     build:
