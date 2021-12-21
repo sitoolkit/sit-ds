@@ -63,6 +63,7 @@ services:
     environment:
       TZ: ${OS_TIMEZONE}
       PGPORT: ${DB_PORT}
+      POSTGRES_PASSWORD: postgres
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d postgres -U postgres"]
       interval: 10s
