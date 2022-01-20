@@ -12,6 +12,6 @@ if [[ -e ${INIT_FILE} ]]; then
 
 fi
 
-psql -h dbms -p ${DB_PORT} -d redmine -U redmine -f /tmp/redmine-additional-config.sql
+PGPASSWORD=redmine psql -h dbms -p ${DB_PORT} -d redmine -U redmine -f /tmp/redmine-additional-config.sql
 
 touch ${INIT_FILE}
