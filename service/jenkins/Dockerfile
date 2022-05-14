@@ -12,3 +12,11 @@ COPY *.groovy /usr/share/jenkins/ref/init.groovy.d/
 
 RUN set -eux \
   && usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+
+USER root
+
+RUN curl -sL https://deb.nodesource.com/setup_14.x
+RUN apt-get update
+RUN apt-get -y install nodejs
+RUN apt-get -y install npm
+RUN npm install -g newman
