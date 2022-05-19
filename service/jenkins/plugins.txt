@@ -83,3 +83,4 @@ workflow-step-api
 workflow-support
 ws-cleanup
 nodejs
+jaxb
