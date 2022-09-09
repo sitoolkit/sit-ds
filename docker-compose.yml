@@ -102,6 +102,9 @@ services:
             'attributes' => {
               'username' => ['uid', 'userid', '${LDAP_FULLNAME_ATTRIBUTE}'],
               'email' => ['mail', 'email', '${LDAP_MAIL_ATTRIBUTE}'],
+              'name' => 'cn',
+              'first_name' => 'givenName',
+              'last_name' => 'sn'
             },
             'lowercase_usernames' => false,
           }
@@ -111,11 +114,23 @@ services:
         gitlab_rails['smtp_address'] = 'smtp'
         gitlab_rails['gitlab_email_from'] = 'gitlab@${GITLAB_SMTP_DOMAIN}'
         gitlab_rails['gitlab_email_reply_to'] = '${MAIL_RELAY_USER}'
+        postgresql['enable'] = false
+        gitlab_rails['db_adapter'] = 'postgresql'
+        gitlab_rails['db_encoding'] = 'utf8'
+        gitlab_rails['db_host'] = '${DB_HOST}'
+        gitlab_rails['db_port'] = '${DB_PORT}'
+        gitlab_rails['db_username'] = 'postgres'
+        gitlab_rails['db_password'] = 'postgres'
+        gitlab_rails['db_database'] = 'gitlab'
+
     ports:
       - 8929:8929
     volumes:
-      - scm_config:/etc/gitlab
-      - scm_data:/var/opt/gitlab
+      - 'scm_config:/etc/gitlab'
+      - 'scm_data:/var/opt/gitlab'
+      # - '$GITLAB_HOME/config:/etc/gitlab'
+      # - '$GITLAB_HOME/logs:/var/log/gitlab'
+      # - '$GITLAB_HOME/data:/var/opt/gitlab'
 
   ci:
     build:
