@@ -93,27 +93,31 @@ services:
           'main' => {
             'label' => 'LDAP',
             'host' => '${LDAP_HOST}',
-            'port' => ${LDAP_PORT},
+            'port' => '${LDAP_PORT}',
             'uid' => '${LDAP_LOGIN_ATTRIBUTE}',
             'encryption' => 'plain',
             'bind_dn' => '${LDAP_MANAGER_DN}',
             'password' => '${LDAP_MANAGER_PASSWORD}',
             'base' => '${LDAP_ROOT_DN}',
             'attributes' => {
-              'username' => ['uid', 'userid', '${LDAP_FULLNAME_ATTRIBUTE}'],
+              'username' => ['uid', 'userid', '${LDAP_LOGIN_ATTRIBUTE}'],
               'email' => ['mail', 'email', '${LDAP_MAIL_ATTRIBUTE}'],
-              'name' => 'cn',
+              'name' => '${LDAP_LOGIN_ATTRIBUTE}',
               'first_name' => 'givenName',
-              'last_name' => 'sn'
+              'last_name' => '${LDAP_LOGIN_ATTRIBUTE}',
             },
             'lowercase_usernames' => false,
+            'group_base' => 'ou=gitlab_groups,ou=groups,dc=example',
+            'admin_group' => 'gitlab_admins',
           }
         }
+
         gitlab_rails['smtp_enable'] = true
         gitlab_rails['smtp_port'] = '${SMTP_PORT}'
         gitlab_rails['smtp_address'] = 'smtp'
         gitlab_rails['gitlab_email_from'] = 'gitlab@${GITLAB_SMTP_DOMAIN}'
         gitlab_rails['gitlab_email_reply_to'] = '${MAIL_RELAY_USER}'
+
         postgresql['enable'] = false
         gitlab_rails['db_adapter'] = 'postgresql'
         gitlab_rails['db_encoding'] = 'utf8'
@@ -128,9 +132,6 @@ services:
     volumes:
       - 'scm_config:/etc/gitlab'
       - 'scm_data:/var/opt/gitlab'
-      # - '$GITLAB_HOME/config:/etc/gitlab'
-      # - '$GITLAB_HOME/logs:/var/log/gitlab'
-      # - '$GITLAB_HOME/data:/var/opt/gitlab'
 
   ci:
     build:
