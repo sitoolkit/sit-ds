@@ -88,6 +88,8 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://localhost:8929'
+
+        # ldap
         gitlab_rails['ldap_enabled'] = true
         gitlab_rails['ldap_servers'] = {
           'main' => {
@@ -107,17 +109,17 @@ services:
               'last_name' => '${LDAP_LOGIN_ATTRIBUTE}',
             },
             'lowercase_usernames' => false,
-            'group_base' => 'ou=gitlab_groups,ou=groups,dc=example',
-            'admin_group' => 'gitlab_admins',
           }
         }
 
+        # smtp
         gitlab_rails['smtp_enable'] = true
         gitlab_rails['smtp_port'] = '${SMTP_PORT}'
         gitlab_rails['smtp_address'] = 'smtp'
         gitlab_rails['gitlab_email_from'] = 'gitlab@${GITLAB_SMTP_DOMAIN}'
         gitlab_rails['gitlab_email_reply_to'] = '${MAIL_RELAY_USER}'
 
+        # dbms
         postgresql['enable'] = false
         gitlab_rails['db_adapter'] = 'postgresql'
         gitlab_rails['db_encoding'] = 'utf8'
@@ -126,7 +128,6 @@ services:
         gitlab_rails['db_username'] = 'postgres'
         gitlab_rails['db_password'] = 'postgres'
         gitlab_rails['db_database'] = 'gitlab'
-
     ports:
       - 8929:8929
     volumes:
