@@ -32,6 +32,19 @@ services:
       - ${SMTP_PORT}:${SMTP_PORT}
       - 8025:8025
 
+  # smtp:
+  #     environment:
+  #       MAIL_RELAY_HOST: ${MAIL_RELAY_HOST}
+  #       MAIL_RELAY_PORT: ${MAIL_RELAY_PORT}
+  #       MAIL_RELAY_USER: ${MAIL_RELAY_USER}
+  #       MAIL_RELAY_PASS: ${MAIL_RELAY_PASS}
+  #       TZ: ${OS_TIMEZONE}
+  #     image: tecnativa/postfix-relay
+  #     restart: always
+  #     ports:
+  #       - ${SMTP_PORT}:${SMTP_PORT}
+  #       - 8025:8025
+
   passchg:
     build:
       context: ./service/ssp
