@@ -48,7 +48,7 @@ The endpoint URL to each service and the connection information of the admin use
 
 |        Server         |             Endpoint URL (*1)             |         UserId / Password          |
 | --------------------- | ----------------------------------------- | ---------------------------------- |
-| GitLab                | http://localhost/gitlab                   | root  / root                       |
+| GitLab                | https://scm.localhost                     | admin / admin                      |
 | Jenkins               | http://localhost/jenkins                  | admin / admin                      |
 | SonarQube             | http://localhost/sonarqube                | admin / admin                      |
 | Redmine               | http://localhost/redmine                  | admin / admin                      |
