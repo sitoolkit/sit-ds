@@ -88,7 +88,8 @@ services:
       - .env
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://localhost:8929'
+        external_url '${PUBLIC_PROTOCOL}://scm.${PUBLIC_HOST}'
+        nginx['listen_port'] = ${GITLAB_PROXY_PORT}
         # ldap
         gitlab_rails['ldap_enabled'] = true
         gitlab_rails['ldap_servers'] = {
