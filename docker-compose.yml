@@ -77,49 +77,59 @@ services:
       - dbms_data:/var/lib/postgresql/data
 
   scm:
-    image: sameersbn/gitlab:${VERSION_SCM}
-    env_file:
-      - .env
+    image: gitlab/gitlab-ce:${VERSION_SCM}
+    restart: always
     depends_on:
       - ldap
       - smtp
       - dbms
       - kvs
+    env_file:
+      - .env
     environment:
-      DB_ADAPTER: postgresql
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_USER: gitlab
-      DB_PASS: gitlab
-      DB_NAME: gitlab
-      REDIS_HOST: kvs
-      REDIS_PORT: 6379
-      GITLAB_ROOT_PASSWORD: root
-      GITLAB_SECRETS_DB_KEY_BASE: ${GITLAB_SECRETS_DB_KEY_BASE}
-      GITLAB_SECRETS_SECRET_KEY_BASE: ${GITLAB_SECRETS_SECRET_KEY_BASE}
-      GITLAB_SECRETS_OTP_KEY_BASE: ${GITLAB_SECRETS_OTP_KEY_BASE}
-      GITLAB_HOST: ${PUBLIC_HOST}
-      GITLAB_RELATIVE_URL_ROOT: "/gitlab"
-
-      # LDAP
-      LDAP_ENABLED: "true"
-      LDAP_HOST: ${LDAP_HOST}
-      LDAP_BIND_DN: ${LDAP_MANAGER_DN}
-      LDAP_BASE: ${LDAP_ROOT_DN}
-      LDAP_UID: ${LDAP_LOGIN_ATTRIBUTE}
-      LDAP_USER_ATTRIBUTE_USERNAME: ${LDAP_FULLNAME_ATTRIBUTE}
-      LDAP_USER_ATTRIBUTE_MAIL: ${LDAP_MAIL_ATTRIBUTE}
-      LDAP_PASS: ${LDAP_MANAGER_PASSWORD}
-
-      # SMTP
-      SMTP_ENABLED: "true"
-      SMTP_HOST: smtp
-      SMTP_PORT: ${SMTP_PORT}
-      GITLAB_EMAIL: gitlab@${GITLAB_SMTP_DOMAIN}
-      GITLAB_EMAIL_REPLY_TO: ${MAIL_RELAY_USER}
-    restart: always
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url '${PUBLIC_PROTOCOL}://scm.${PUBLIC_HOST}'
+        nginx['listen_port'] = ${GITLAB_PROXY_PORT}
+        # ldap
+        gitlab_rails['ldap_enabled'] = true
+        gitlab_rails['ldap_servers'] = {
+          'main' => {
+            'label' => 'LDAP',
+            'host' => '${LDAP_HOST}',
+            'port' => '${LDAP_PORT}',
+            'uid' => '${LDAP_LOGIN_ATTRIBUTE}',
+            'encryption' => 'plain',
+            'bind_dn' => '${LDAP_MANAGER_DN}',
+            'password' => '${LDAP_MANAGER_PASSWORD}',
+            'base' => '${LDAP_ROOT_DN}',
+            'attributes' => {
+              'username' => ['uid', 'userid', '${LDAP_LOGIN_ATTRIBUTE}'],
+              'email' => ['mail', 'email', '${LDAP_MAIL_ATTRIBUTE}'],
+              'name' => '${LDAP_LOGIN_ATTRIBUTE}',
+              'first_name' => 'givenName',
+              'last_name' => '${LDAP_LOGIN_ATTRIBUTE}',
+            },
+            'lowercase_usernames' => false,
+          }
+        }
+        # smtp
+        gitlab_rails['smtp_enable'] = true
+        gitlab_rails['smtp_port'] = '${SMTP_PORT}'
+        gitlab_rails['smtp_address'] = 'smtp'
+        gitlab_rails['gitlab_email_from'] = 'gitlab@${GITLAB_SMTP_DOMAIN}'
+        gitlab_rails['gitlab_email_reply_to'] = '${MAIL_RELAY_USER}'
+        # dbms
+        postgresql['enable'] = false
+        gitlab_rails['db_adapter'] = 'postgresql'
+        gitlab_rails['db_encoding'] = 'utf8'
+        gitlab_rails['db_host'] = '${DB_HOST}'
+        gitlab_rails['db_port'] = '${DB_PORT}'
+        gitlab_rails['db_username'] = 'gitlab'
+        gitlab_rails['db_password'] = 'gitlab'
+        gitlab_rails['db_database'] = 'gitlab'
     volumes:
-      - scm_data:/home/git/data:Z
+      - 'scm_config:/etc/gitlab'
+      - 'scm_data:/var/opt/gitlab'
 
   ci:
     build:
@@ -292,6 +302,7 @@ volumes:
   ldap_data:
   sca_data:
   scm_data:
+  scm_config:
   arm_data:
   wiki_data:
   search_engine_data:

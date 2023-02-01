@@ -48,7 +48,7 @@ The endpoint URL to each service and the connection information of the admin use
 
 |        Server         |             Endpoint URL (*1)             |         UserId / Password          |
 | --------------------- | ----------------------------------------- | ---------------------------------- |
-| GitLab                | http://localhost/gitlab                   | root  / root                       |
+| GitLab                | https://scm.localhost                     | admin / admin                      |
 | Jenkins               | http://localhost/jenkins                  | admin / admin                      |
 | SonarQube             | http://localhost/sonarqube                | admin / admin                      |
 | Redmine               | http://localhost/redmine                  | admin / admin                      |
@@ -83,8 +83,8 @@ userPassword: password
 2. Execute the following command.
 
 ```
-docker cp add-users.ldif sit-ds_work_1:/tmp
-docker-compose exec work ldapmod add-users.ldif
+docker cp add-users.ldif sit-ds-work-1:/tmp
+docker compose exec work ldapmod add-users.ldif
 ```
 
 Then you can log in to all services with the following user ID / password.
