@@ -190,23 +190,19 @@ services:
 
   arm:
     build:
-      context: ./service/artifactory
+      context: ./service/nexus
       args:
         VERSION_ARM: ${VERSION_ARM}
-        VERSION_UBUNTU: ${VERSION_UBUNTU}
     depends_on:
       - ldap
-      - dbms
     env_file:
       - .env
     environment:
-      TZ: ${OS_TIMEZONE}
-      DB_TYPE: postgresql
-      DB_URL: ${DB_JDBC_URL}/artifactory
-      DB_USER: artifactory
-      DB_PASSWORD: artifactory
+        TZ: ${OS_TIMEZONE}
+    ports:
+      - ${NEXUS_DOCKER_PORT}:${NEXUS_DOCKER_PORT}
     volumes:
-      - arm_data:/var/opt/jfrog/artifactory
+      - arm_data:/nexus-data
     restart: always
 
   proxy:

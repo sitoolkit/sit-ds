@@ -52,7 +52,7 @@ The endpoint URL to each service and the connection information of the admin use
 | Jenkins               | http://localhost/jenkins                  | admin / admin                      |
 | SonarQube             | http://localhost/sonarqube                | admin / admin                      |
 | Redmine               | http://localhost/redmine                  | admin / admin                      |
-| Artifactory           | http://localhost/artifactory              | admin / password                   |
+| Nexus                 | http://localhost/nexus                    | admin / admin                      |
 | PostgreSQL            | jdbc:postgresql://localhost:5432/postgres | postgres / postgres                |
 | Self Service Password | http://localhost/passchg                  | admin / admin                      |
 | phpLDAPAdmin          | https://localhost:17443                   | cn=admin,dc=example,dc=org / admin |
