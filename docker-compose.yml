@@ -189,20 +189,19 @@ services:
       - its_data:/usr/src/redmine/files
 
   arm:
-    build:
-      context: ./service/nexus
-      args:
-        VERSION_ARM: ${VERSION_ARM}
+    image: sonatype/nexus3:${VERSION_ARM}
     depends_on:
       - ldap
-    env_file:
-      - .env
     environment:
         TZ: ${OS_TIMEZONE}
     ports:
       - ${NEXUS_DOCKER_PORT}:${NEXUS_DOCKER_PORT}
     volumes:
       - arm_data:/nexus-data
+    entrypoint: >
+      bash -c 
+      "echo -n ${LDAP_MANAGER_PASSWORD} > /nexus-data/admin.password &&
+      /opt/sonatype/nexus/bin/nexus run"
     restart: always
 
   proxy:

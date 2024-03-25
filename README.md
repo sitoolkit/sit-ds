@@ -110,6 +110,12 @@ This automated test is implemented by [Web Tester](https://github.com/sitoolkit/
 - SearchEngine: https://docs.requarks.io/en/search/elasticsearch
   - analyzer: kuromoji
 
+### Migration maven artifacts from Artifactory to Nexus
+sit-ds changed arm from Artifactory to Nexus.
+Here are the steps to migrate maven artifacts from Artifactory to Nexus.
+
+1. 
+
 ### Backup
 
 1. Execute backup.sh specifing the directory you want to save backup files.
