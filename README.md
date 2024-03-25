@@ -114,7 +114,7 @@ This automated test is implemented by [Web Tester](https://github.com/sitoolkit/
 sit-ds changed arm from Artifactory to Nexus.  
 Here are the steps to migrate maven artifacts from Artifactory to Nexus.
 
-#### １． artifactory export
+#### １． Artifactory export
 ```
 curl -X POST -u admin:admin http://localhost/artifactory/api/export/system \
 -H "Content-Type: application/json" \
@@ -137,9 +137,9 @@ mkdir arm-export
 docker cp sit-ds-arm-1:$(docker exec -it sit-ds-arm-1 bash -c "echo -n /tmp/export/*")/repositories arm-export
 ```
 
-#### 2. sit-ds update artifactory → Nexus
+#### 2. sit-ds update Artifactory → Nexus
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > Always make backups.
 
 ```
@@ -149,9 +149,9 @@ git pull
 docker-compose up -d
 ```
 
-#### 3. nexus import
+#### 3. Nexus import
 
-* Create repository in Nexus
+* Create repository in Nexus  
 access http://localhost/nexus/#admin/repository/repositories  
 `+Create repository` > `maven2(hosted)`
 
