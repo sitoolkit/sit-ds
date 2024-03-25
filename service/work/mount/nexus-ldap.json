@@ -13,7 +13,7 @@
   "maxIncidentsCount": 3,
   "userBaseDn": "",
   "userSubtree": true,
-  "userObjectClass": "{{ .Env.NEXUS_USER_OBJECTCLASS }}",
+  "userObjectClass": "{{ .Env.LDAP_USER_OBJECTCLASS }}",
   "userLdapFilter": "",
   "userIdAttribute": "{{ .Env.LDAP_LOGIN_ATTRIBUTE }}",
   "userRealNameAttribute": "{{ .Env.LDAP_FULLNAME_ATTRIBUTE }}",
