@@ -114,7 +114,7 @@ This automated test is implemented by [Web Tester](https://github.com/sitoolkit/
 sit-ds changed arm from Artifactory to Nexus.  
 Here are the steps to migrate maven artifacts from Artifactory to Nexus.
 
-#### １． Artifactory export
+#### 1. Artifactory export
 ```
 curl -X POST -u admin:admin http://localhost/artifactory/api/export/system \
 -H "Content-Type: application/json" \
