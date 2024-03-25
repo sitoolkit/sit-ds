@@ -1,13 +1,9 @@
 #!/bin/bash
 
-set -eux
-
 ADMIN="admin:${LDAP_MANAGER_PASSWORD}"
 BASE_URL="http://arm:8081/service/rest/v1/security/"
 CONT_TEXT="text/plain"
 CONT_JSON="application/json"
-
-cd "$(dirname "$0")"
 
 getConfig() {
   curl -sS -u "${ADMIN}" "${BASE_URL}$1"
