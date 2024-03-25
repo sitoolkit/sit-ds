@@ -1,9 +1,0 @@
-﻿No.,ItemName,Operation,LocatorStyle,Locator,DataStyle,Screenshot,Breakpoint,Case_001
-1,startUrl,open,,artifactory/webapp/,,,,y
-2,resize,setWindowSize,,,,,,"1000,800"
-3,wait,wait,css,#login-form > div.login-inner.ng-scope > h3,,,,Welcome to JFrog Artifactory!
-4,userId,input,name,user,,,,"#{T(java.lang.System).getProperty(""userId"")}"
-5,password,input,name,password,,,,"#{T(java.lang.System).getProperty(""password"")}"
-6,login,click,id,login,,before,,y
-7,waitInitialize,wait,css,body > div.modal.fade.ng-isolate-scope.in > div > div > div > div.modal-header > div > div > h1,,,,Welcome to JFrog Artifactory!
-8,verifyLogin,verify,css,#jf-header > div.navbar-right > div > div > a.navbar-link.username-header.ng-binding,,before,,"#{T(java.lang.System).getProperty(""userId"")}"

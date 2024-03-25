@@ -1,0 +1,9 @@
+{
+  "id": "{{ .Env.LDAP_USER_OBJECTCLASS }}",
+  "source": "default",
+  "name": "ldap-dev",
+  "description": "LDAP Developer Role",
+  "readOnly": false,
+  "privileges": [],
+  "roles": ["nx-dev"]
+}
