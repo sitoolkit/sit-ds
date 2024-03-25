@@ -131,9 +131,7 @@ curl -X POST -u admin:admin http://localhost/artifactory/api/export/system \
   \"incremental\" : false,
   \"excludeContent\" : false,
 }"
-
 mkdir arm-export
-
 docker cp sit-ds-arm-1:$(docker exec -it sit-ds-arm-1 bash -c "echo -n /tmp/export/*")/repositories arm-export
 ```
 
@@ -154,13 +152,14 @@ docker-compose up -d
 * Create repository in Nexus  
 access http://localhost/nexus/#admin/repository/repositories  
 `+Create repository` > `maven2(hosted)`
-
-```
-cd arm-export/repositories
-curl https://raw.githubusercontent.com/sonatype-nexus-community/nexus-repository-import-scripts/master/mavenimport.sh -o mavenimport.sh
-cd <your-artifactory-repository>
-../mavenimport.sh -r http://localhost/nexus/repository/<your-nexus-repository>/ -u admin -p admin
-```
+  
+* Import artifacts
+  ```
+  cd arm-export/repositories
+  curl https://raw.githubusercontent.com/sonatype-nexus-community/nexus-repository-import-scripts/master/mavenimport.sh -o mavenimport.sh
+  cd <your-artifactory-repo-name>
+  ../mavenimport.sh -r http://localhost/nexus/repository/<your-nexus-repo-name>/ -u admin -p admin
+  ```
 
 > [!TIP]
 > Some metadata is not imported due to different Artifactory format,  
