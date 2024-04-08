@@ -3,7 +3,7 @@
 Dev Servers is a Docker Compose asset to setup server tools for CI / CD.
 It setups the following tools with Docker and makes them available immediately.
 
-* Souce Code Management : GitLab
+* Souce Code Management : GitBucket
 * Continuous Integration : Jenkins
 * Static Code Analysis : SonarQube
 * Issue Tracking System : Redmine
@@ -48,7 +48,7 @@ The endpoint URL to each service and the connection information of the admin use
 
 |        Server         |             Endpoint URL (*1)             |         UserId / Password          |
 | --------------------- | ----------------------------------------- | ---------------------------------- |
-| GitLab                | http://localhost/gitlab                   | root  / root                       |
+| GitBucket             | http://localhost/gitbucket                | root  / root                       |
 | Jenkins               | http://localhost/jenkins                  | admin / admin                      |
 | SonarQube             | http://localhost/sonarqube                | admin / admin                      |
 | Redmine               | http://localhost/redmine                  | admin / admin                      |
