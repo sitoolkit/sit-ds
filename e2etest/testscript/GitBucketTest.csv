@@ -1,0 +1,8 @@
+No.,ItemName,Operation,LocatorStyle,Locator,DataStyle,Screenshot,Breakpoint,Case_001
+1,startUrl,open,,gitbucket/signin?redirect=%2F,,,,y
+2,userId,input,id,userName,,,,"#{T(java.lang.System).getProperty(""userId"")}"
+3,password,input,id,password,,,,"#{T(java.lang.System).getProperty(""password"")}"
+4,login,click,css,input.btn.btn-success,,before,,y
+5,clickDropDown,click,css,li.dropdown.notifications-menu:nth-child(2) > a,,before,,y
+6,viewAccount,click,link,Your profile,,before,,y
+7,verifyLogin,verify,css,div.pull-left.info p,,after,,"#{T(java.lang.System).getProperty(""userId"")}"
