@@ -59,6 +59,8 @@ services:
     restart: always
     healthcheck:
       test: "curl -sf localhost || exit 1"
+      interval: 5s
+      retries: 100
 
   kvs:
     environment:
