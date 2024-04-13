@@ -31,7 +31,7 @@ Each service has the following settings necessary for team development.
     * https://store.docker.com/search?type=edition&offering=community
   * Another Windows
     * https://docs.docker.com/toolbox/toolbox_install_windows/
-1. Set the memory allocation of Docker to 4 GB or more.
+1. Set Docker memory allocation. Minimum: 6GB, Recommended: 8GB or more.
   * Windows 10 Pro
     * Settings > Advanced > Memory
   * Mac
