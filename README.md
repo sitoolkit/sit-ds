@@ -123,17 +123,16 @@ Assume Artifactory is running.
    1. Export Artifactory data
       ```bash
       curl -X POST -u admin:password http://localhost/artifactory/api/export/system -H "Content-Type: application/json" -d "{ \"exportPath\" : \"/tmp/export\", \"includeMetadata\" : false, \"createArchive\" : false, \"bypassFiltering\" : false, \"verbose\" : false, \"failOnError\" : false, \"failIfEmpty\" : true, \"m2\" : false, \"incremental\" : false, \"excludeContent\" : false }"
-      mkdir backup
       ```
 
    1. Get data from Artifactory container
-      * bash
       ```bash
-      docker cp sit-ds-arm-1:$(docker exec -it sit-ds-arm-1 bash -c 'echo -n $(ls -rtd /tmp/export/* | tail -n 1)')/repositories backup
-      ```
+      mkdir backup
 
-      * cmd
-      ```bat
+      # bash
+      docker cp sit-ds-arm-1:$(docker exec -it sit-ds-arm-1 bash -c 'echo -n $(ls -rtd /tmp/export/* | tail -n 1)')/repositories backup
+      
+      # cmd
       for /f "usebackq delims=" %A in (`docker exec -it sit-ds-arm-1 bash -c "ls -rtd /tmp/export/* | tail -n 1"`) do set EXPORT_DIR=%A
       docker cp sit-ds-arm-1:%EXPORT_DIR%/repositories backup
       ```
@@ -156,7 +155,7 @@ Assume Artifactory is running.
       <br>
 
    1. Import artifacts
-      * Run this only if you are using cmd.
+      * run this only if you are using cmd
       ```bat
       docker run -v %CD%/backup:/backup -it --rm alpine sh -c "apk add curl bash && bash"
       ```
@@ -167,9 +166,14 @@ Assume Artifactory is running.
       curl https://raw.githubusercontent.com/sonatype-nexus-community/nexus-repository-import-scripts/master/mavenimport.sh -o mavenimport.sh
       chmod a+x mavenimport.sh
 
-      # Repeat for as many repositories to import
+      # Repeat for as many repositories to import.
       ------------------------------------------------------------------------------------------------------------
       cd <your-artifactory-repo-name>
+
+      # bash
+      ../mavenimport.sh -r http://localhost/nexus/repository/<your-nexus-repo-name>/ -u admin -p admin
+
+      # cmd
       ../mavenimport.sh -r http://host.docker.internal/nexus/repository/<your-nexus-repo-name>/ -u admin -p admin
       ------------------------------------------------------------------------------------------------------------
       ```
