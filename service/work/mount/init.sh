@@ -4,7 +4,7 @@ set -eux
 
 readonly INIT_FILE='/tmp/.init'
 
-dockerize -wait tcp://${LDAP_HOST}:${LDAP_PORT} -wait tcp://its:3000 -timeout 60s
+dockerize -wait tcp://${LDAP_HOST}:${LDAP_PORT} -wait tcp://its:3000 -wait tcp://arm:8081 -timeout 60s
 
 if [[ -e ${INIT_FILE} ]]; then
 
@@ -13,5 +13,7 @@ if [[ -e ${INIT_FILE} ]]; then
 fi
 
 PGPASSWORD=redmine psql -h dbms -p ${DB_PORT} -d redmine -U redmine -f /tmp/redmine-additional-config.sql
+
+./nexus-config.sh
 
 touch ${INIT_FILE}

@@ -193,27 +193,22 @@ services:
       retries: 100
 
   arm:
-    build:
-      context: ./service/artifactory
-      args:
-        VERSION_ARM: ${VERSION_ARM}
-        VERSION_UBUNTU: ${VERSION_UBUNTU}
+    image: sonatype/nexus3:${VERSION_ARM}
     depends_on:
       - ldap
-      - dbms
-    env_file:
-      - .env
     environment:
       TZ: ${OS_TIMEZONE}
-      DB_TYPE: postgresql
-      DB_URL: ${DB_JDBC_URL}/artifactory
-      DB_USER: artifactory
-      DB_PASSWORD: artifactory
+    ports:
+      - ${NEXUS_DOCKER_PORT}:${NEXUS_DOCKER_PORT}
     volumes:
-      - arm_data:/var/opt/jfrog/artifactory
+      - arm_data:/nexus-data
+    entrypoint: >
+      bash -c 
+      "echo -n ${LDAP_MANAGER_PASSWORD} > /nexus-data/admin.password &&
+      /opt/sonatype/nexus/bin/nexus run"
     restart: always
     healthcheck:
-      test: "wget localhost:8081 -O /dev/null -t 1 || exit 1"
+      test: "curl -sf localhost:8081 || exit 1"
       interval: 5s
       retries: 100
 
