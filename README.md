@@ -121,12 +121,12 @@ Here are the steps to migrate maven artifacts from Artifactory to Nexus.
 Assume Artifactory is running.
 
    1. Export Artifactory data
-      ```bash
+      ```
       curl -X POST -u admin:password http://localhost/artifactory/api/export/system -H "Content-Type: application/json" -d "{ \"exportPath\" : \"/tmp/export\", \"includeMetadata\" : false, \"createArchive\" : false, \"bypassFiltering\" : false, \"verbose\" : false, \"failOnError\" : false, \"failIfEmpty\" : true, \"m2\" : false, \"incremental\" : false, \"excludeContent\" : false }"
       ```
 
    1. Get data from Artifactory container
-      ```bash
+      ```
       mkdir backup
 
       # bash
@@ -139,7 +139,7 @@ Assume Artifactory is running.
 
 1. **sit-ds update Artifactory → Nexus**
 
-   ```bash
+   ```
    docker-compose down proxy arm work --rmi local
    docker volume rm sit-ds_arm_data
    git pull
@@ -156,12 +156,12 @@ Assume Artifactory is running.
 
    1. Import artifacts
       * run this only if you are using cmd
-      ```bat
+      ```
       docker run -v %CD%/backup:/backup -it --rm alpine sh -c "apk add curl bash && bash"
       ```
 
       * common procedure
-      ```bash  
+      ```  
       cd backup/repositories
       curl https://raw.githubusercontent.com/sonatype-nexus-community/nexus-repository-import-scripts/master/mavenimport.sh -o mavenimport.sh
       chmod a+x mavenimport.sh
