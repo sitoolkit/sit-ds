@@ -195,7 +195,10 @@ services:
   arm:
     image: sonatype/nexus3:${VERSION_ARM}
     depends_on:
-      - ldap
+      ldap:
+        condition: service_started
+      ci:
+        condition: service_healthy
     environment:
       TZ: ${OS_TIMEZONE}
     ports:
