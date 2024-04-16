@@ -1,0 +1,13 @@
+{
+  "id": "nx-dev",
+  "source": "default",
+  "name": "nx-dev",
+  "description": "Developer Role",
+  "readOnly": false,
+  "privileges": [
+    "nx-repository-admin-*-*-*",
+    "nx-search-read",
+    "nx-repository-view-*-*-*"
+  ],
+  "roles": []
+}
