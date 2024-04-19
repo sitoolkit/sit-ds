@@ -158,7 +158,7 @@ services:
     volumes:
       - sca_data:/opt/sonarqube/data
     healthcheck:
-      test: "curl -sf localhost:9000/sonarqube/ || exit 1"
+      test: "wget localhost:9000/sonarqube/ -O /dev/null -t 1 || exit 1"
       interval: 5s
       retries: 100
 
