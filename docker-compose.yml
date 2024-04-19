@@ -284,8 +284,6 @@ services:
       DB_PASS: wikijs
       DB_NAME: wikijs
       TZ: ${OS_TIMEZONE}
-    volumes:
-      - wiki_data:/wiki
     healthcheck:
       test: "curl -sf localhost:3000 || exit 1"
       interval: 5s
@@ -316,5 +314,4 @@ volumes:
   sca_data:
   scm_data:
   arm_data:
-  wiki_data:
   search_engine_data:
