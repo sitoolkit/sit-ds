@@ -1,6 +1,0 @@
-No.,ItemName,Operation,LocatorStyle,Locator,DataStyle,Screenshot,Breakpoint,Case_001
-1,startUrl,open,,redmine/login,,,,y
-3,userId,input,id,username,,,,"#{T(java.lang.System).getProperty(""userId"")}"
-4,password,input,id,password,,,,"#{T(java.lang.System).getProperty(""password"")}"
-5,login,click,name,login,,before,,y
-6,verifyLogin,verify,css,#loggedas a,,after,,"#{T(java.lang.System).getProperty(""userId"")}"

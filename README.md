@@ -55,7 +55,7 @@ The endpoint URL to each service and the connection information of the admin use
 | Nexus                 | http://localhost/nexus                    | admin / admin                      |
 | Nexus(Docker registry)| http://localhost:5001                     | admin / admin                      |
 | PostgreSQL            | jdbc:postgresql://localhost:5432/postgres | postgres / postgres                |
-| Self Service Password | http://localhost/passchg                  | admin / admin                      |
+| Self Service Password | http://localhost/passchg                  | -                                  |
 | phpLDAPAdmin          | https://localhost:17443                   | cn=admin,dc=example,dc=org / admin |
 | Wiki.js               | https://wiki.localhost                    | - (*2)                             |
 
@@ -97,12 +97,15 @@ Then you can log in to all services with the following user ID / password.
 The following command confirms that the user added above can log in to each service by the automated test.
 
 ```
-docker-compose exec e2etest ./mvnw verify -DuserId=user001 -Dpassword=password
+docker-compose exec e2etest npm run env USER_ID=user001 PASSWORD=password npm test
 ```
 
-See e2etest/evidence/evidence_yyyymmddhhmmss/report/failsafe-report.html for the results of the automated test. 
+See http://localhost:9323 for the results of the automated test. 
 
-This automated test is implemented by [Web Tester](https://github.com/sitoolkit/sit-wt-all).
+> [!TIP]
+> If you get Segmentation fault errors using Docker Desktop for Mac  
+> try setting the Virtualization framework to off.  
+> See this issue for more information. https://github.com/docker/for-mac/issues/6824
 
 ### Wiki.js Configuration
 

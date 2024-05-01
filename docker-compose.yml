@@ -258,14 +258,15 @@ services:
     build:
       context: ./e2etest
       args:
-        VERSION: ${VERSION_UBUNTU}
+        VERSION: ${VERSION_PW}
     env_file:
       - .env
-    environment:
-        TZ: ${OS_TIMEZONE}
     volumes:
       - ./e2etest:/mnt
-    working_dir: /mnt
+      - /mnt/node_modules
+    ports:
+      - "9323:9323"
+    ipc: host
     restart: always
 
   wiki:
