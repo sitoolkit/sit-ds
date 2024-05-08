@@ -74,7 +74,7 @@ changetype: add
 cn: user001
 sn: User
 givenName: 001
-mail: user001@exapmle.org
+mail: user001@example.org
 objectClass: inetOrgPerson
 objectClass: person
 objectClass: top
