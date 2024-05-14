@@ -7,7 +7,7 @@ USER root
 
 RUN set -eux \
     && : "Install dockerize" \
-    && curl -sSL -o dockerize.tar.gz https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz \
+    && wget -O dockerize.tar.gz https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz \
     && tar -xzvf dockerize.tar.gz -C /usr/local/bin \
     && rm dockerize.tar.gz
 

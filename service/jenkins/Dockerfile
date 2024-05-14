@@ -7,6 +7,9 @@ ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false \
   -Dhudson.model.DirectoryBrowserSupport.CSP=\"default-src 'self'; script-src * 'unsafe-inline'; style-src * 'unsafe-inline'; img-src *; child-src 'self'; sandbox allow-same-origin allow-scripts;  font-src *;\"" \
   JENKINS_OPTS=--prefix=/jenkins
 
+ENV PLUGINS_FORCE_UPGRADE=true
+ENV TRY_UPGRADE_IF_NO_MARKER=true
+
 USER jenkins
 
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt

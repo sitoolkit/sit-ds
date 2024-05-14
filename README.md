@@ -110,7 +110,40 @@ This automated test is implemented by [Web Tester](https://github.com/sitoolkit/
 - SearchEngine: https://docs.requarks.io/en/search/elasticsearch
   - analyzer: kuromoji
 
-### Migration maven artifacts from Artifactory to Nexus
+### Backup
+
+1. Execute backup.sh specifing the directory you want to save backup files.
+   1. All services will be stopped.
+   2. All named volumes in docker-compose.yml will be backuped to backup/{timestamp} directory.
+   3. 8th and subsequent directories in order of age will be deleted. 
+   4. All services will be started.
+
+```
+./backup.sh /path/to/backup/directory
+```
+
+
+```
+/path/to/backup/directory
+  - yyyymmdd_hhmmss
+    - ci_data.tar
+    - dbms_data.tar
+      :
+```
+
+### Restore
+
+1. Execute restore.sh specifying the path of the directory that contains the backup file you want to restore.
+   Read and restore tar file of "sit-ds_" prefix of specified directory.
+
+```
+git clone https://github.com/sitoolkit/sit-ds.git
+cd sit-ds
+./restore.sh /path/to/backup/directory/yyyymmdd_hhmmss
+docker-compose up -d
+```
+
+## Migration maven artifacts from Artifactory to Nexus
 sit-ds changed arm from Artifactory to Nexus.  
 Here are the steps to migrate maven artifacts from Artifactory to Nexus.
 
@@ -184,35 +217,10 @@ Assume Artifactory is running.
 > access http://localhost/nexus/#admin/system/tasks  
 > `+Create task` > `Repair - Rebuild Maven repository metadata (maven-metadata.xml)`
 
-### Backup
+## Notes on SonarQube Version Upgrade
+You may need to go through a specific version of SonarQube to upgrade.
+See link for details.
+https://docs.sonarsource.com/sonarqube/latest/setup-and-upgrade/upgrade-the-server/determine-path
 
-1. Execute backup.sh specifing the directory you want to save backup files.
-   1. All services will be stopped.
-   2. All named volumes in docker-compose.yml will be backuped to backup/{timestamp} directory.
-   3. 8th and subsequent directories in order of age will be deleted. 
-   4. All services will be started.
-
-```
-./backup.sh /path/to/backup/directory
-```
-
-
-```
-/path/to/backup/directory
-  - yyyymmdd_hhmmss
-    - ci_data.tar
-    - dbms_data.tar
-      :
-```
-
-### Restore
-
-1. Execute restore.sh specifying the path of the directory that contains the backup file you want to restore.
-   Read and restore tar file of "sit-ds_" prefix of specified directory.
-
-```
-git clone https://github.com/sitoolkit/sit-ds.git
-cd sit-ds
-./restore.sh /path/to/backup/directory/yyyymmdd_hhmmss
-docker-compose up -d
-```
+If you need to change the version of SonarQube in sit-ds to go through with the upgrade,  
+change the `VERSION_SCA` in the .env file.
