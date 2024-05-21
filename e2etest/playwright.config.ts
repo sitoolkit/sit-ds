@@ -12,10 +12,10 @@ export default defineConfig({
   ],
 
   use: {
-    video: 'on',
-    screenshot: 'on',
     baseURL: `${process.env.PUBLIC_PROTOCOL}://${process.env.PUBLIC_HOST}`,
-    trace: 'on-first-retry',
+    screenshot: 'on',
+    trace: 'on',
+    video: 'on',
   },
 
   /* Configure projects for major browsers */
