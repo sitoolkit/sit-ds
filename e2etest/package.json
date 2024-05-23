@@ -1,0 +1,27 @@
+{
+  "name": "e2etest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test-ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "env": "cross-env"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "playwright": "^1.43.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.43.1",
+    "@types/node": "^20.12.7",
+    "cross-env": "^7.0.3",
+    "playwright-core": "^1.43.1"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "description": ""
+}

@@ -1,11 +1,5 @@
-/evidence/
-/guidance/
-/log/
-sit-wt-app-pom-*
-/target/
-
-.classpath
-.factorypath
-.project
-.settings
-
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
