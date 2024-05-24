@@ -57,10 +57,9 @@ The endpoint URL to each service and the connection information of the admin use
 | PostgreSQL            | jdbc:postgresql://localhost:5432/postgres | postgres / postgres                |
 | Self Service Password | http://localhost/passchg                  | -                                  |
 | phpLDAPAdmin          | https://localhost:17443                   | cn=admin,dc=example,dc=org / admin |
-| Wiki.js               | https://wiki.localhost                    | - (*2)                             |
+| Wiki.js               | https://wiki.localhost                    | admin@example.org / admin          |
 
 * *1 For Docker Toolbox, it is an IP address that can be confirmed with docker-machine ls command instead of localhost.
-* *2 You can create administrator account when first access on browser.
 
 ### How To Add Users
 
@@ -107,11 +106,6 @@ See http://localhost:9323 for the results of the automated test.
 > try setting the Virtualization framework to off.  
 > See this issue for more information. https://github.com/docker/for-mac/issues/6824
 
-### Wiki.js Configuration
-
-- Authentication: https://docs.requarks.io/auth/ldap
-- SearchEngine: https://docs.requarks.io/en/search/elasticsearch
-  - analyzer: kuromoji
 
 ### Backup
 

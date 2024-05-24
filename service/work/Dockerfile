@@ -9,6 +9,6 @@ ENV PATH $PATH:/tmp
 WORKDIR /tmp
 
 CMD dockerize -template /mnt:./ \
-  chmod u+x init.sh ldapmod nexus-config.sh && \
+  chmod u+x init.sh ldapmod nexus-config.sh wiki-config.sh && \
   ./init.sh && \
   tail -f /dev/null

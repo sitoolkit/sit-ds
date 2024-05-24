@@ -267,6 +267,8 @@ services:
     ports:
       - "9323:9323"
     ipc: host
+    extra_hosts:
+      - wiki.localhost:127.0.0.1
     restart: always
 
   wiki:
@@ -300,7 +302,12 @@ services:
     volumes:
       - search_engine_data:/usr/share/elasticsearch/data
     entrypoint: >
-      bash -c "elasticsearch-plugin install analysis-kuromoji && docker-entrypoint.sh"
+      bash -c "
+        { 
+          if [ -z $(elasticsearch-plugin list) ]; then 
+            elasticsearch-plugin install analysis-kuromoji
+          fi
+        } && docker-entrypoint.sh"
     healthcheck:
       test: "curl -sf localhost:9200 || exit 1"
       interval: 5s

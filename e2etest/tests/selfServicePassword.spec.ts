@@ -18,14 +18,14 @@ const chPass = async (
   await expect(page.locator('.alert-success')).toBeVisible();
 };
 
-test('change password', async ({ page, user, admin }) => {
-  test.skip(user.id === admin.id);
+test('change password', async ({ page, user }) => {
+  test.skip(user.id === 'admin');
 
   await chPass(page, user.id, user.password, `${user.password}2`);
 });
 
-test('revert password', async ({ page, user, admin }) => {
-  test.skip(user.id === admin.id);
+test('revert password', async ({ page, user }) => {
+  test.skip(user.id === 'admin');
 
   await chPass(page, user.id, `${user.password}2`, user.password);
 });
