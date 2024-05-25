@@ -148,9 +148,9 @@ services:
     env_file:
       - .env
     environment:
-      SONARQUBE_JDBC_USERNAME: sonarqube
-      SONARQUBE_JDBC_PASSWORD: sonarqube
-      SONARQUBE_JDBC_URL: ${DB_JDBC_URL}/sonarqube
+      SONAR_JDBC_USERNAME: sonarqube
+      SONAR_JDBC_PASSWORD: sonarqube
+      SONAR_JDBC_URL: ${DB_JDBC_URL}/sonarqube
       TZ: ${OS_TIMEZONE}
     # ports:
     #   - 9000:9000
