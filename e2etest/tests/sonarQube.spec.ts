@@ -1,12 +1,14 @@
 import { expect, test } from './base';
 
-test('login', async ({ page, baseURL, user, admin }) => {
-  const sqUser = user.id === admin.id ? admin : user;
+const sqAdmin = { id: 'admin', password: 'admin' };
+
+test('login', async ({ page, baseURL, user }) => {
+  if (user.id === 'admin') user = sqAdmin;
 
   await page.goto('/sonarqube/sessions/new');
 
-  await page.locator('#login').fill(sqUser.id);
-  await page.locator('#password').fill(sqUser.password);
+  await page.locator('#login').fill(user.id);
+  await page.locator('#password').fill(user.password);
   await page.locator('#login_form').getByRole('button').click();
   await page.waitForURL(/.*(projects|account).*/);
 
@@ -16,5 +18,5 @@ test('login', async ({ page, baseURL, user, admin }) => {
   }
 
   await page.goto('/sonarqube/account');
-  await expect(page.locator('#login')).toHaveText(sqUser.id);
+  await expect(page.locator('#login')).toHaveText(user.id);
 });

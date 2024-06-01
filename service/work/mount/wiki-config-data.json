@@ -1,0 +1,236 @@
+{
+  "finalize": {
+    "adminEmail": "admin@{{ .Env.LDAP_DOMAIN }}",
+    "adminPassword": "{{ .Env.LDAP_MANAGER_PASSWORD }}",
+    "adminPasswordConfirm": "{{ .Env.LDAP_MANAGER_PASSWORD }}",
+    "siteUrl": "{{ .Env.PUBLIC_PROTOCOL }}://wiki.{{ .Env.PUBLIC_HOST }}",
+    "telemetry": false
+  },
+  "auth": [
+    {
+      "operationName": null,
+      "variables": {
+        "username": "admin@{{ .Env.LDAP_DOMAIN }}",
+        "password": "{{ .Env.LDAP_MANAGER_PASSWORD }}",
+        "strategy": "local"
+      },
+      "extensions": {},
+      "query": "mutation ($username: String!, $password: String!, $strategy: String!) {\n  authentication {\n    login(username: $username, password: $password, strategy: $strategy) {\n      responseResult {\n        succeeded\n        errorCode\n        slug\n        message\n        __typename\n      }\n      jwt\n      mustChangePwd\n      mustProvideTFA\n      mustSetupTFA\n      continuationToken\n      redirect\n      tfaQRImage\n      __typename\n    }\n    __typename\n  }\n}\n"
+    }
+  ],
+  "group": [
+    {
+      "operationName": null,
+      "variables": { "name": "page editor" },
+      "extensions": {},
+      "query": "mutation ($name: String!) {\n  groups {\n    create(name: $name) {\n      responseResult {\n        succeeded\n        errorCode\n        slug\n        message\n        __typename\n      }\n      group {\n        id\n        name\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
+    }
+  ],
+  "groupPermission": [
+    {
+      "operationName": null,
+      "variables": {
+        "id": 3,
+        "name": "page editor",
+        "redirectOnLogin": "/",
+        "permissions": [
+          "read:pages",
+          "read:assets",
+          "read:comments",
+          "write:comments",
+          "write:pages",
+          "manage:pages",
+          "delete:pages",
+          "write:styles",
+          "write:scripts",
+          "read:source",
+          "read:history",
+          "write:assets",
+          "manage:assets",
+          "manage:comments"
+        ],
+        "pageRules": [
+          {
+            "id": "default",
+            "path": "",
+            "roles": [
+              "read:pages",
+              "read:assets",
+              "read:comments",
+              "write:comments",
+              "write:pages",
+              "manage:pages",
+              "delete:pages",
+              "read:source",
+              "read:history",
+              "write:assets",
+              "manage:assets",
+              "write:styles",
+              "write:scripts",
+              "manage:comments"
+            ],
+            "match": "START",
+            "deny": false,
+            "locales": []
+          }
+        ]
+      },
+      "extensions": {},
+      "query": "mutation ($id: Int!, $name: String!, $redirectOnLogin: String!, $permissions: [String]!, $pageRules: [PageRuleInput]!) {\n  groups {\n    update(id: $id, name: $name, redirectOnLogin: $redirectOnLogin, permissions: $permissions, pageRules: $pageRules) {\n      responseResult {\n        succeeded\n        errorCode\n        slug\n        message\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
+    }
+  ],
+  "ldap": [
+    {
+      "operationName": null,
+      "variables": {
+        "strategies": [
+          {
+            "key": "local",
+            "strategyKey": "local",
+            "displayName": "Local",
+            "order": 0,
+            "isEnabled": true,
+            "config": [],
+            "selfRegistration": false,
+            "domainWhitelist": [],
+            "autoEnrollGroups": []
+          },
+          {
+            "key": "ldap",
+            "strategyKey": "ldap",
+            "displayName": "LDAP / Active Directory",
+            "order": 1,
+            "isEnabled": true,
+            "config": [
+              {
+                "key": "url",
+                "value": "{\"v\":\"ldap://{{ .Env.LDAP_HOST }}:{{ .Env.LDAP_PORT }}\"}"
+              },
+              {
+                "key": "bindDn",
+                "value": "{\"v\":\"{{ .Env.LDAP_MANAGER_DN }}\"}"
+              },
+              {
+                "key": "bindCredentials",
+                "value": "{\"v\":\"{{ .Env.LDAP_MANAGER_PASSWORD }}\"}"
+              },
+              {
+                "key": "searchBase",
+                "value": "{\"v\":\"dc=example,dc=org\"}"
+              },
+              {
+                "key": "searchFilter",
+                 "value": "{\"v\":\"({{ .Env.LDAP_LOGIN_ATTRIBUTE }}={{ "{{" }}username{{ "}} "}})\"}"
+              },
+              { "key": "tlsEnabled", "value": "{\"v\":false}" },
+              { "key": "verifyTLSCertificate", "value": "{\"v\":false}" },
+              { "key": "tlsCertPath", "value": "{\"v\":\"\"}" },
+              {
+                "key": "mappingUID",
+                "value": "{\"v\":\"{{ .Env.LDAP_LOGIN_ATTRIBUTE }}\"}"
+              },
+              {
+                "key": "mappingEmail",
+                "value": "{\"v\":\"{{ .Env.LDAP_MAIL_ATTRIBUTE }}\"}"
+              },
+              {
+                "key": "mappingDisplayName",
+                "value": "{\"v\":\"{{ .Env.LDAP_LOGIN_ATTRIBUTE }}\"}"
+              },
+              { "key": "mappingPicture", "value": "{\"v\":\"\"}" },
+              { "key": "mapGroups", "value": "{\"v\":false}" },
+              { "key": "groupSearchBase", "value": "{\"v\":\"\"}" },
+              { "key": "groupSearchFilter", "value": "{\"v\":\"\"}" },
+              { "key": "groupSearchScope", "value": "{\"v\":\"\"}" },
+              { "key": "groupDnProperty", "value": "{\"v\":\"\"}" },
+              { "key": "groupNameField", "value": "{\"v\":\"\"}" }
+            ],
+            "selfRegistration": true,
+            "domainWhitelist": [],
+            "autoEnrollGroups": [3]
+          }
+        ]
+      },
+      "extensions": {},
+      "query": "mutation ($strategies: [AuthenticationStrategyInput]!) {\n  authentication {\n    updateStrategies(strategies: $strategies) {\n      responseResult {\n        succeeded\n        errorCode\n        slug\n        message\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
+    }
+  ],
+  "searchEngine": [
+    {
+      "operationName": null,
+      "variables": {
+        "engines": [
+          {
+            "isEnabled": false,
+            "key": "aws",
+            "config": [
+              { "key": "domain", "value": "{\"v\":\"\"}" },
+              { "key": "endpoint", "value": "{\"v\":\"\"}" },
+              { "key": "region", "value": "{\"v\":\"us-east-1\"}" },
+              { "key": "accessKeyId", "value": "{\"v\":\"\"}" },
+              { "key": "secretAccessKey", "value": "{\"v\":\"\"}" },
+              { "key": "AnalysisSchemeLang", "value": "{\"v\":\"en\"}" }
+            ]
+          },
+          {
+            "isEnabled": false,
+            "key": "algolia",
+            "config": [
+              { "key": "appId", "value": "{\"v\":\"\"}" },
+              { "key": "apiKey", "value": "{\"v\":\"\"}" },
+              { "key": "indexName", "value": "{\"v\":\"wiki\"}" }
+            ]
+          },
+          {
+            "isEnabled": false,
+            "key": "azure",
+            "config": [
+              { "key": "serviceName", "value": "{\"v\":\"\"}" },
+              { "key": "adminKey", "value": "{\"v\":\"\"}" },
+              { "key": "indexName", "value": "{\"v\":\"wiki\"}" }
+            ]
+          },
+          { "isEnabled": false, "key": "db", "config": [] },
+          {
+            "isEnabled": false,
+            "key": "postgres",
+            "config": [
+              { "key": "dictLanguage", "value": "{\"v\":\"english\"}" }
+            ]
+          },
+          {
+            "isEnabled": true,
+            "key": "elasticsearch",
+            "config": [
+              { "key": "apiVersion", "value": "{\"v\":\"7.x\"}" },
+              {
+                "key": "hosts",
+                "value": "{\"v\":\"http://search-engine:9200\"}"
+              },
+              { "key": "verifyTLSCertificate", "value": "{\"v\":false}" },
+              { "key": "tlsCertPath", "value": "{\"v\":\"\"}" },
+              { "key": "indexName", "value": "{\"v\":\"wiki\"}" },
+              { "key": "analyzer", "value": "{\"v\":\"kuromoji\"}" },
+              { "key": "sniffOnStart", "value": "{\"v\":false}" },
+              { "key": "sniffInterval", "value": "{\"v\":0}" }
+            ]
+          },
+          { "isEnabled": false, "key": "manticore", "config": [] },
+          {
+            "isEnabled": false,
+            "key": "solr",
+            "config": [
+              { "key": "host", "value": "{\"v\":\"solr\"}" },
+              { "key": "port", "value": "{\"v\":8983}" },
+              { "key": "core", "value": "{\"v\":\"wiki\"}" },
+              { "key": "protocol", "value": "{\"v\":\"http\"}" }
+            ]
+          },
+          { "isEnabled": false, "key": "sphinx", "config": [] }
+        ]
+      },
+      "extensions": {},
+      "query": "mutation ($engines: [SearchEngineInput]) {\n  search {\n    updateSearchEngines(engines: $engines) {\n      responseResult {\n        succeeded\n        errorCode\n        slug\n        message\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
+    }
+  ]
+}
