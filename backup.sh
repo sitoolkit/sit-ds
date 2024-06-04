@@ -15,8 +15,8 @@ log() {
 do_backup() {
   readonly VOLUME_PREFIX='sit-ds_'
   readonly BACKUP_VOLUMES=(
-    "ci_data" "dbms_data" "its_data" "ldap_conf" "ldap_data" 
-    "sca_data" "scm_data" "arm_data" "search_engine_data"
+      "ci_data" "dbms_data" "its_data" "ldap_conf" "ldap_data" 
+      "sca_data" "scm_data" "arm_data" "search_engine_data" "work_data"
     )
   readonly TIMESTAMP="$(date +%Y%m%d_%H%M%S)"
   readonly COMMIT_ID="$(git rev-parse HEAD)"

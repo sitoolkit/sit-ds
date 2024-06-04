@@ -252,6 +252,7 @@ services:
         TZ: ${OS_TIMEZONE}
     volumes:
       - ./service/work/mount:/mnt
+      - work_data:/tmp/init
     restart: always
 
   e2etest:
@@ -323,3 +324,4 @@ volumes:
   scm_data:
   arm_data:
   search_engine_data:
+  work_data:
