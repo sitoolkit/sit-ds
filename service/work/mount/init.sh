@@ -2,24 +2,21 @@
 
 set -eux
 
-readonly INIT_FILE='/tmp/.init'
+readonly INIT_FILE_DIR='/tmp/init'
 
-dockerize -wait tcp://${LDAP_HOST}:${LDAP_PORT} \
-          -wait tcp://its:3000 \
-          -wait tcp://wiki:3000 \
-          -wait tcp://arm:8081 \
-          -timeout 60s
+dockerize -wait tcp://${LDAP_HOST}:${LDAP_PORT} -timeout 60s
 
-if [[ -e ${INIT_FILE} ]]; then
+initService() {
+  if [[ ! -e ${INIT_FILE_DIR}/.$1 ]]; then
+    dockerize -wait tcp://$2 -timeout 60s
+    eval $3
+    touch ${INIT_FILE_DIR}/.$1
+  fi
+}
 
-  exit 0
+initService redmine its:3000 \
+  'PGPASSWORD=redmine psql -h dbms -p ${DB_PORT} -d redmine -U redmine -f /tmp/redmine-additional-config.sql'
 
-fi
+initService wikijs wiki:3000 ./wiki-config.sh
 
-PGPASSWORD=redmine psql -h dbms -p ${DB_PORT} -d redmine -U redmine -f /tmp/redmine-additional-config.sql
-
-./wiki-config.sh
-
-./nexus-config.sh
-
-touch ${INIT_FILE}
+initService nexus arm:8081 ./nexus-config.sh
